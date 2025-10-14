@@ -42,7 +42,7 @@ const PALETTE = ["#3C91E6","#F5D547","#43C465","#E64C3C","#A47551","#8E5A30","#9
 const log = (t)=>{ document.getElementById('log').textContent += t + "\\n"; };
 
 async function loadWords(){
-  const res = await fetch('./data/words.json', { cache:'no-store' });
+  const res = await fetch('./data/words-library.json', { cache:'no-store' });
   if(!res.ok) throw new Error('Failed to load data/words.json');
   return res.json();
 }
