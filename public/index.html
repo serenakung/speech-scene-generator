@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Speech Scenes — text-only generator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<main>
+  <h1>Speech Scenes — text-only generator</h1>
+
+  <!-- IPA phoneme checklist -->
+  <section class="controls">
+    <div class="group">
+      <label class="group-label">Phonemes (IPA):</label>
+      <div id="phonemeChecks" class="checks">
+        <!-- Default set (expand as you add data) -->
+        <label><input type="checkbox" name="phoneme" value="s" checked> /s/</label>
+        <label><input type="checkbox" name="phoneme" value="ʃ"> /ʃ/</label>
+        <label><input type="checkbox" name="phoneme" value="k"> /k/</label>
+        <label><input type="checkbox" name="phoneme" value="t"> /t/</label>
+        <label><input type="checkbox" name="phoneme" value="z"> /z/</label>
+        <label><input type="checkbox" name="phoneme" value="θ"> /θ/</label>
+      </div>
+    </div>
+
+    <div class="group">
+      <label class="group-label">Positions:</label>
+      <div id="positionChecks" class="checks">
+        <label><input type="checkbox" name="position" value="initial" checked> initial</label>
+        <label><input type="checkbox" name="position" value="medial" checked> medial</label>
+        <label><input type="checkbox" name="position" value="final" checked> final</label>
+      </div>
+    </div>
+
+    <div class="group row">
+      <label> Scene:
+        <select id="sceneType">
+          <option value="i-spy">I-spy (nouns)</option>
+          <option value="actions">Actions (verbs)</option>
+          <option value="mixed" selected>Mixed</option>
+        </select>
+      </label>
+
+      <label> Items:
+        <input id="count" type="number" min="4" max="24" value="12" />
+      </label>
+
+      <label class="row"><input id="showLabels" type="checkbox" checked /> Show labels</label>
+      <label class="row"><input id="outline" type="checkbox" /> Add outlines</label>
+
+      <button id="generate">Generate</button>
+      <button id="exportPng">Export PNG (A4)</button>
+    </div>
+  </section>
+
+  <section class="canvas-wrap">
+    <!-- A4 @ 300dpi, scaled down in CSS for preview -->
+    <canvas id="scene" width="2480" height="3508" aria-label="Generated scene"></canvas>
+  </section>
+
+  <aside id="targets"></aside>
+  <p class="hint"><small>
+    Word bank lives at <code>public/data/words.json</code>. Serve the folder locally:
+    <code>python -m http.server 8080</code> → open <code>http://localhost:5001</code>.
+  </small></p>
+</main>
+
+<script type="module" src="main.js"></script>
+</body>
+</html>

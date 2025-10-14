@@ -1,0 +1,25 @@
+{
+  "nouns": [
+    { "word": "sun",      "position": "initial", "syllables": 1, "phonemes": ["s"] },
+    { "word": "sock",     "position": "initial", "syllables": 1, "phonemes": ["s"] },
+    { "word": "soup",     "position": "initial", "syllables": 1, "phonemes": ["s"] },
+    { "word": "sandwich", "position": "initial", "syllables": 2, "phonemes": ["s"] },
+    { "word": "pencil",   "position": "medial",  "syllables": 2, "phonemes": ["s"] },
+    { "word": "castle",   "position": "medial",  "syllables": 2, "phonemes": ["s"] },
+    { "word": "whistle",  "position": "medial",  "syllables": 2, "phonemes": ["s"] },
+    { "word": "bus",      "position": "final",   "syllables": 1, "phonemes": ["s"] },
+    { "word": "mouse",    "position": "final",   "syllables": 1, "phonemes": ["s"] },
+    { "word": "house",    "position": "final",   "syllables": 1, "phonemes": ["s"] }
+  ],
+  "verbs": [
+    { "word": "sip",   "position": "initial", "syllables": 1, "phonemes": ["s"] },
+    { "word": "sit",   "position": "initial", "syllables": 1, "phonemes": ["s"] },
+    { "word": "slice", "position": "initial", "syllables": 1, "phonemes": ["s"] },
+    { "word": "stir",  "position": "initial", "syllables": 1, "phonemes": ["s"] },
+    { "word": "sing",  "position": "initial", "syllables": 1, "phonemes": ["s"] },
+    { "word": "skate", "position": "initial", "syllables": 1, "phonemes": ["s"] },
+    { "word": "skip",  "position": "initial", "syllables": 1, "phonemes": ["s"] },
+    { "word": "see",   "position": "initial", "syllables": 1, "phonemes": ["s"] },
+    { "word": "smile", "position": "initial", "syllables": 1, "phonemes": ["s"] }
+  ]
+}

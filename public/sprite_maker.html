@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8" />
+<title>Sprite Maker — block images from words.json</title>
+<style>
+  body{font-family:system-ui,Segoe UI,Roboto,sans-serif;margin:24px;max-width:820px}
+  button,select,input{font:inherit}
+  .row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:12px 0}
+  .log{margin-top:12px;max-height:40vh;overflow:auto;background:#f7f7f7;border:1px solid #ddd;padding:8px}
+</style>
+<body>
+<h1>Sprite Maker</h1>
+<p>This generates square PNGs (coloured blocks with labels) for every noun/verb in <code>data/words.json</code>.</p>
+
+<div class="row">
+  <label>Size:
+    <select id="size">
+      <option value="512">512×512</option>
+      <option value="768">768×768</option>
+      <option value="1024">1024×1024</option>
+    </select>
+  </label>
+  <label>Font size:
+    <input id="fontSize" type="number" value="64" min="24" max="160"/>
+  </label>
+  <label>Outline:
+    <input id="outline" type="checkbox" />
+  </label>
+  <button id="makeNouns">Make nouns</button>
+  <button id="makeVerbs">Make verbs</button>
+  <button id="makeAll">Make ALL</button>
+</div>
+
+<div class="row">
+  <small>Tip: Your browser will download one PNG per word. You can tweak colours in code below if you like.</small>
+</div>
+
+<pre class="log" id="log"></pre>
+
+<script>
+const PALETTE = ["#3C91E6","#F5D547","#43C465","#E64C3C","#A47551","#8E5A30","#9C27B0","#FF9800","#607D8B"];
+const log = (t)=>{ document.getElementById('log').textContent += t + "\\n"; };
+
+async function loadWords(){
+  const res = await fetch('./data/words.json', { cache:'no-store' });
+  if(!res.ok) throw new Error('Failed to load data/words.json');
+  return res.json();
+}
+
+function makeBlockPNG(label, kind, idx, size, fontPx, outline){
+  const cvs = document.createElement('canvas');
+  cvs.width = size; cvs.height = size;
+  const ctx = cvs.getContext('2d');
+
+  // background
+  ctx.fillStyle = PALETTE[idx % PALETTE.length];
+  ctx.fillRect(0,0,size,size);
+
+  // optional outline
+  if(outline){
+    ctx.lineWidth = Math.max(6, Math.floor(size*0.01));
+    ctx.strokeStyle = "#333";
+    ctx.strokeRect(0,0,size,size);
+  }
+
+  // text
+  ctx.fillStyle = "#111";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.font = `bold ${fontPx}px system-ui,Segoe UI,Roboto,sans-serif`;
+
+  // simple wrap for long words
+  const maxWidth = size * 0.84;
+  const words = String(label).split(/\s+/).filter(Boolean);
+  const lines = [];
+  let cur = words[0] || "";
+  for(let i=1;i<words.length;i++){
+    const t = cur + " " + words[i];
+    if(ctx.measureText(t).width <= maxWidth) cur = t;
+    else { lines.push(cur); cur = words[i]; }
+  }
+  lines.push(cur);
+
+  const lineHeight = fontPx * 1.15;
+  const total = lines.length * lineHeight;
+  let y = size/2 - total/2 + lineHeight/2;
+  for(const line of lines){ ctx.fillText(line, size/2, y, maxWidth); y += lineHeight; }
+
+  // download
+  const a = document.createElement('a');
+  const safe = label.toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_|_$/g,'');
+  const prefix = kind === 'verb' ? 'verb_' : 'obj_';
+  a.download = `${prefix}${safe}.png`;
+  a.href = cvs.toDataURL('image/png');
+  a.click();
+}
+
+async function run(kind){ // 'noun' or 'verb' or 'all'
+  const size = parseInt(document.getElementById('size').value,10);
+  const fontPx = parseInt(document.getElementById('fontSize').value,10);
+  const outline = document.getElementById('outline').checked;
+
+  const data = await loadWords();
+  const nouns = data.nouns || [];
+  const verbs = data.verbs || [];
+
+  if(kind === 'noun' || kind === 'all'){
+    log(`Generating ${nouns.length} noun sprites (${size}px)…`);
+    nouns.forEach((n,i)=> makeBlockPNG(n.word, 'noun', i, size, fontPx, outline));
+  }
+  if(kind === 'verb' || kind === 'all'){
+    log(`Generating ${verbs.length} verb sprites (${size}px)…`);
+    verbs.forEach((v,i)=> makeBlockPNG(v.word, 'verb', i, size, fontPx, outline));
+  }
+  log('Done.');
+}
+
+document.getElementById('makeNouns').addEventListener('click', ()=>run('noun'));
+document.getElementById('makeVerbs').addEventListener('click', ()=>run('verb'));
+document.getElementById('makeAll').addEventListener('click',  ()=>run('all'));
+</script>
+</body>
+</html>
