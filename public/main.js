@@ -146,16 +146,23 @@ function drawLabelInRect(x, y, w, h, label) {
 }
 
 async function drawItem({ item, rect, color, outline, showLabel }) {
-  // Always draw the colour block as a background
-  drawBlock(rect.x, rect.y, rect.w, rect.h, color, outline);
-
-  // If item has an image, try to draw it; otherwise skip (block acts as placeholder)
+  // Try to load the item's image (if any)
   const img = await loadImage(item.image);
-  if (img) drawImageFit(img, rect.x, rect.y, rect.w, rect.h, 20);
 
-  // Optional label on top
+  if (img) {
+    // Draw the image only (no coloured box)
+    drawImageFit(img, rect.x, rect.y, rect.w, rect.h, 20);
+  } else {
+    // No image? fallback to coloured block + optional label
+    drawBlock(rect.x, rect.y, rect.w, rect.h, color, outline);
+    if (showLabel) drawLabelInRect(rect.x, rect.y, rect.w, rect.h, item.word);
+    return;
+  }
+
+  // Optional: still show a label over/with the image if enabled
   if (showLabel) drawLabelInRect(rect.x, rect.y, rect.w, rect.h, item.word);
 }
+
 
 // ---- Filtering & selection ----
 function pool(type, phonemes, positions) {
