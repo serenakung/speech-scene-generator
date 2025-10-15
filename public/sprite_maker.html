@@ -1,17 +1,26 @@
 <!doctype html>
 <html lang="en">
 <meta charset="utf-8" />
-<title>Sprite Maker — block images from words-library.json</title>
+<title>Sprite Maker — nouns/verbs colours</title>
 <style>
-  body{font-family:system-ui,Segoe UI,Roboto,sans-serif;margin:24px;max-width:820px}
+  body{font-family:system-ui,Segoe UI,Roboto,sans-serif;margin:24px;max-width:880px}
   button,select,input{font:inherit}
   .row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:12px 0}
-  .log{margin-top:12px;max-height:40vh;overflow:auto;background:#f7f7f7;border:1px solid #ddd;padding:8px}
+  .log{margin-top:12px;max-height:40vh;overflow:auto;background:#f7f7f7;border:1px solid #ddd;padding:8px;white-space:pre-wrap}
+  label.inline{display:inline-flex;gap:8px;align-items:center}
 </style>
 <body>
 <h1>Sprite Maker</h1>
-<p>This generates square PNGs (coloured blocks with labels) for every noun/verb in <code>data/words-library.json</code>.</p>
+<p>Create square PNGs (solid colour blocks with labels) from your word bank.</p>
 
+<!-- Load JSON -->
+<div class="row">
+  <strong>Word bank:</strong>
+  <input id="jsonFile" type="file" accept="application/json" />
+  <span>…or serve <code>./data/words-library.json</code>/<code>./data/words.json</code> over http://</span>
+</div>
+
+<!-- Options -->
 <div class="row">
   <label>Size:
     <select id="size">
@@ -21,30 +30,76 @@
     </select>
   </label>
   <label>Font size:
-    <input id="fontSize" type="number" value="64" min="24" max="160"/>
+    <input id="fontSize" type="number" value="64" min="24" max="200"/>
   </label>
-  <label>Outline:
+  <label class="inline">Outline:
     <input id="outline" type="checkbox" />
   </label>
-  <button id="makeNouns">Make nouns</button>
-  <button id="makeVerbs">Make verbs</button>
-  <button id="makeAll">Make ALL</button>
 </div>
 
-<input id="jsonFile" type="file" accept="application/json" />
-
+<!-- Colours -->
 <div class="row">
-  <small>Tip: Your browser will download one PNG per word. You can tweak colours in code below if you like.</small>
+  <label class="inline">Noun colour:
+    <input id="nounColor" type="color" value="#3C91E6" />
+  </label>
+  <label class="inline">Verb colour:
+    <input id="verbColor" type="color" value="#F5D547" />
+  </label>
 </div>
+
+<!-- Actions -->
+<div class="row">
+  <button id="makeNouns">Download nouns</button>
+  <button id="makeVerbs">Download verbs</button>
+  <button id="makeAll">Download ALL</button>
+  <button id="saveToFolder">Save to folder (Chrome/Edge)</button>
+</div>
+
+<small>
+Tips: If downloads don’t start, allow “Automatic downloads” for localhost/site in browser site settings.
+When using a local server, you should be able to open <code>/data/words*.json</code> directly in the browser.
+</small>
 
 <pre class="log" id="log"></pre>
 
 <script>
-const PALETTE = ["#3C91E6","#F5D547","#43C465","#E64C3C","#A47551","#8E5A30","#9C27B0","#FF9800","#607D8B"];
-const log = (t)=>{ document.getElementById('log').textContent += t + "\\n"; };
-
+const $ = s => document.querySelector(s);
+const log = (...t)=>{ $('#log').textContent += t.join(' ') + "\\n"; };
 
 let WORDS_CACHE = null;
+
+// ---- Load word bank (file picker first; else fetch) ----
+async function loadWords(){
+  const input = $('#jsonFile');
+  if (input && input.files && input.files[0]) {
+    const text = await input.files[0].text();
+    const json = JSON.parse(text);
+    validateWords(json);
+    WORDS_CACHE = json;
+    log('Loaded word bank from file picker.');
+    return json;
+  }
+  // Try served files
+  const tryFetch = async (path) => {
+    try{
+      const res = await fetch(path, { cache:'no-store' });
+      if(!res.ok) throw new Error(`HTTP ${res.status}`);
+      const j = await res.json();
+      validateWords(j);
+      log('Loaded word bank from', path);
+      return j;
+    }catch(e){
+      log('Could not load', path, '-', e.message);
+      return null;
+    }
+  };
+  if (WORDS_CACHE) return WORDS_CACHE;
+  const a = await tryFetch('./data/words-library.json');
+  if (a) return (WORDS_CACHE = a);
+  const b = await tryFetch('./data/words.json');
+  if (b) return (WORDS_CACHE = b);
+  throw new Error('Failed to load words: pick a file OR serve ./data/words-library.json / ./data/words.json');
+}
 
 function validateWords(json){
   if (!json || !Array.isArray(json.nouns) || !Array.isArray(json.verbs)) {
@@ -52,108 +107,147 @@ function validateWords(json){
   }
 }
 
-async function loadWords(){
-  // If user selected a file (works even under file://)
-  const input = document.getElementById('jsonFile');
-  if (input && input.files && input.files[0]) {
-    const text = await input.files[0].text();
-    const json = JSON.parse(text);
-    validateWords(json);
-    WORDS_CACHE = json;
-    return WORDS_CACHE;
-  }
-
-  // Try your filename first
-  try {
-    const res = await fetch('./data/words-library.json', { cache: 'no-store' });
-    if (!res.ok) throw new Error('not found');
-    const json = await res.json();
-    validateWords(json);
-    WORDS_CACHE = json;
-    return WORDS_CACHE;
-  } catch (_) { /* fall through */ }
-
-  // Fallback to words.json
-  const res2 = await fetch('./data/words.json', { cache: 'no-store' });
-  if (!res2.ok) throw new Error('Failed to load ./data/words-library.json and ./data/words.json');
-  const json2 = await res2.json();
-  validateWords(json2);
-  WORDS_CACHE = json2;
-  return WORDS_CACHE;
+// ---- Sprite generation ----
+function sanitizeFilename(s){
+  return String(s).toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_|_$/g,'');
 }
 
+function makeBlockBlob(label, size, fontPx, outline, fillHex){
+  return new Promise(resolve => {
+    const cvs = document.createElement('canvas');
+    cvs.width = size; cvs.height = size;
+    const ctx = cvs.getContext('2d');
 
-function makeBlockPNG(label, kind, idx, size, fontPx, outline){
-  const cvs = document.createElement('canvas');
-  cvs.width = size; cvs.height = size;
-  const ctx = cvs.getContext('2d');
+    // Background
+    ctx.fillStyle = fillHex;
+    ctx.fillRect(0,0,size,size);
 
-  // background
-  ctx.fillStyle = PALETTE[idx % PALETTE.length];
-  ctx.fillRect(0,0,size,size);
+    // Outline
+    if(outline){
+      ctx.lineWidth = Math.max(6, Math.floor(size*0.01));
+      ctx.strokeStyle = "#333";
+      ctx.strokeRect(0,0,size,size);
+    }
 
-  // optional outline
-  if(outline){
-    ctx.lineWidth = Math.max(6, Math.floor(size*0.01));
-    ctx.strokeStyle = "#333";
-    ctx.strokeRect(0,0,size,size);
-  }
+    // Text
+    ctx.fillStyle = "#111";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.font = `bold ${fontPx}px system-ui,Segoe UI,Roboto,sans-serif`;
 
-  // text
-  ctx.fillStyle = "#111";
-  ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
-  ctx.font = `bold ${fontPx}px system-ui,Segoe UI,Roboto,sans-serif`;
+    // Wrap long labels
+    const maxWidth = size * 0.86;
+    const words = String(label).split(/\s+/).filter(Boolean);
+    const lines = [];
+    let cur = words[0] || "";
+    for(let i=1;i<words.length;i++){
+      const t = cur + " " + words[i];
+      if(ctx.measureText(t).width <= maxWidth) cur = t;
+      else { lines.push(cur); cur = words[i]; }
+    }
+    lines.push(cur);
 
-  // simple wrap for long words
-  const maxWidth = size * 0.84;
-  const words = String(label).split(/\s+/).filter(Boolean);
-  const lines = [];
-  let cur = words[0] || "";
-  for(let i=1;i<words.length;i++){
-    const t = cur + " " + words[i];
-    if(ctx.measureText(t).width <= maxWidth) cur = t;
-    else { lines.push(cur); cur = words[i]; }
-  }
-  lines.push(cur);
+    const lineHeight = fontPx * 1.15;
+    const total = lines.length * lineHeight;
+    let y = size/2 - total/2 + lineHeight/2;
+    for(const line of lines){ ctx.fillText(line, size/2, y, maxWidth); y += lineHeight; }
 
-  const lineHeight = fontPx * 1.15;
-  const total = lines.length * lineHeight;
-  let y = size/2 - total/2 + lineHeight/2;
-  for(const line of lines){ ctx.fillText(line, size/2, y, maxWidth); y += lineHeight; }
+    cvs.toBlob(blob => resolve(blob), 'image/png');
+  });
+}
 
-  // download
+async function downloadBlob(filename, blob){
+  const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  const safe = label.toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_|_$/g,'');
-  const prefix = kind === 'verb' ? 'verb_' : 'obj_';
-  a.download = `${prefix}${safe}.png`;
-  a.href = cvs.toDataURL('image/png');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
   a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+  await new Promise(r => setTimeout(r, 100)); // throttle
 }
 
-async function run(kind){ // 'noun' or 'verb' or 'all'
-  const size = parseInt(document.getElementById('size').value,10);
-  const fontPx = parseInt(document.getElementById('fontSize').value,10);
-  const outline = document.getElementById('outline').checked;
+// ---- Run: make nouns/verbs/all ----
+async function run(kind){
+  let data;
+  try { data = await loadWords(); }
+  catch(e){ log(e.message); return; }
 
-  const data = await loadWords();
+  const size    = parseInt($('#size').value,10);
+  const fontPx  = parseInt($('#fontSize').value,10);
+  const outline = $('#outline').checked;
+  const nounHex = $('#nounColor').value || '#3C91E6';
+  const verbHex = $('#verbColor').value || '#F5D547';
+
   const nouns = data.nouns || [];
   const verbs = data.verbs || [];
 
-  if(kind === 'noun' || kind === 'all'){
-    log(`Generating ${nouns.length} noun sprites (${size}px)…`);
-    nouns.forEach((n,i)=> makeBlockPNG(n.word, 'noun', i, size, fontPx, outline));
+  try {
+    if (kind === 'noun' || kind === 'all') {
+      log(`Downloading ${nouns.length} noun sprites at ${size}px in ${nounHex}…`);
+      for (const n of nouns) {
+        const blob = await makeBlockBlob(n.word, size, fontPx, outline, nounHex);
+        await downloadBlob(`obj_${sanitizeFilename(n.word)}.png`, blob);
+      }
+      log('Nouns done.');
+    }
+
+    if (kind === 'verb' || kind === 'all') {
+      log(`Downloading ${verbs.length} verb sprites at ${size}px in ${verbHex}…`);
+      for (const v of verbs) {
+        const blob = await makeBlockBlob(v.word, size, fontPx, outline, verbHex);
+        await downloadBlob(`verb_${sanitizeFilename(v.word)}.png`, blob);
+      }
+      log('Verbs done.');
+    }
+    log('All requested downloads finished.');
+  } catch (e) {
+    log('Error while generating/downloading:', e.message);
   }
-  if(kind === 'verb' || kind === 'all'){
-    log(`Generating ${verbs.length} verb sprites (${size}px)…`);
-    verbs.forEach((v,i)=> makeBlockPNG(v.word, 'verb', i, size, fontPx, outline));
-  }
-  log('Done.');
 }
 
-document.getElementById('makeNouns').addEventListener('click', ()=>run('noun'));
-document.getElementById('makeVerbs').addEventListener('click', ()=>run('verb'));
-document.getElementById('makeAll').addEventListener('click',  ()=>run('all'));
+// ---- Save to folder (Chrome/Edge) ----
+async function saveToFolder(){
+  if(!('showDirectoryPicker' in window)){
+    log('File System Access API not supported in this browser. Use Chrome/Edge on desktop.');
+    return;
+  }
+  let data;
+  try { data = await loadWords(); } catch(e){ log(e.message); return; }
+
+  const size    = parseInt($('#size').value,10);
+  const fontPx  = parseInt($('#fontSize').value,10);
+  const outline = $('#outline').checked;
+  const nounHex = $('#nounColor').value || '#3C91E6';
+  const verbHex = $('#verbColor').value || '#F5D547';
+
+  const dir = await window.showDirectoryPicker({id:'sprite-out', mode:'readwrite'});
+  log('Saving sprites to folder:', dir.name);
+
+  async function writeFile(name, blob){
+    const handle = await dir.getFileHandle(name, { create: true });
+    const w = await handle.createWritable();
+    await w.write(blob);
+    await w.close();
+  }
+
+  for(const n of (data.nouns||[])){
+    const blob = await makeBlockBlob(n.word, size, fontPx, outline, nounHex);
+    await writeFile(`obj_${sanitizeFilename(n.word)}.png`, blob);
+  }
+  for(const v of (data.verbs||[])){
+    const blob = await makeBlockBlob(v.word, size, fontPx, outline, verbHex);
+    await writeFile(`verb_${sanitizeFilename(v.word)}.png`, blob);
+  }
+  log('Saved all sprites to the chosen folder.');
+}
+
+// ---- Wire up ----
+$('#makeNouns').addEventListener('click', ()=>run('noun'));
+$('#makeVerbs').addEventListener('click', ()=>run('verb'));
+$('#makeAll').addEventListener('click',  ()=>run('all'));
+$('#saveToFolder').addEventListener('click', saveToFolder);
 </script>
 </body>
 </html>
