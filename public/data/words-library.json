@@ -1,25 +1,27 @@
 {
   "nouns": [
-    { "word": "sun",      "position": "initial", "syllables": 1, "phonemes": ["s"] },
-    { "word": "sock",     "position": "initial", "syllables": 1, "phonemes": ["s"] },
-    { "word": "soup",     "position": "initial", "syllables": 1, "phonemes": ["s"] },
-    { "word": "sandwich", "position": "initial", "syllables": 2, "phonemes": ["s"] },
-    { "word": "pencil",   "position": "medial",  "syllables": 2, "phonemes": ["s"] },
-    { "word": "castle",   "position": "medial",  "syllables": 2, "phonemes": ["s"] },
-    { "word": "whistle",  "position": "medial",  "syllables": 2, "phonemes": ["s"] },
-    { "word": "bus",      "position": "final",   "syllables": 1, "phonemes": ["s"] },
-    { "word": "mouse",    "position": "final",   "syllables": 1, "phonemes": ["s"] },
-    { "word": "house",    "position": "final",   "syllables": 1, "phonemes": ["s"] }
+    { "word": "sun",      "position": "initial", "syllables": 1, "phonemes": ["s"], "image": "sprites/objects/obj_sun.png" },
+    { "word": "sock",     "position": "initial", "syllables": 1, "phonemes": ["s"], "image": "sprites/objects/obj_sock.png" },
+    { "word": "soup",     "position": "initial", "syllables": 1, "phonemes": ["s"], "image": "sprites/objects/obj_soup.png" },
+    { "word": "sandwich", "position": "initial", "syllables": 2, "phonemes": ["s"], "image": "sprites/objects/obj_sandwich.png" },
+
+    { "word": "pencil",   "position": "medial",  "syllables": 2, "phonemes": ["s"], "image": "sprites/objects/obj_pencil.png" },
+    { "word": "castle",   "position": "medial",  "syllables": 2, "phonemes": ["s"], "image": "sprites/objects/obj_castle.png" },
+    { "word": "whistle",  "position": "medial",  "syllables": 2, "phonemes": ["s"], "image": "sprites/objects/obj_whistle.png" },
+
+    { "word": "bus",      "position": "final",   "syllables": 1, "phonemes": ["s"], "image": "sprites/objects/obj_bus.png" },
+    { "word": "mouse",    "position": "final",   "syllables": 1, "phonemes": ["s"], "image": "sprites/objects/obj_mouse.png" },
+    { "word": "house",    "position": "final",   "syllables": 1, "phonemes": ["s"], "image": "sprites/objects/obj_house.png" }
   ],
   "verbs": [
-    { "word": "sip",   "position": "initial", "syllables": 1, "phonemes": ["s"] },
-    { "word": "sit",   "position": "initial", "syllables": 1, "phonemes": ["s"] },
-    { "word": "slice", "position": "initial", "syllables": 1, "phonemes": ["s"] },
-    { "word": "stir",  "position": "initial", "syllables": 1, "phonemes": ["s"] },
-    { "word": "sing",  "position": "initial", "syllables": 1, "phonemes": ["s"] },
-    { "word": "skate", "position": "initial", "syllables": 1, "phonemes": ["s"] },
-    { "word": "skip",  "position": "initial", "syllables": 1, "phonemes": ["s"] },
-    { "word": "see",   "position": "initial", "syllables": 1, "phonemes": ["s"] },
-    { "word": "smile", "position": "initial", "syllables": 1, "phonemes": ["s"] }
+    { "word": "sip",   "position": "initial", "syllables": 1, "phonemes": ["s"], "image": "sprites/verbs/verb_sip.png" },
+    { "word": "sit",   "position": "initial", "syllables": 1, "phonemes": ["s"], "image": "sprites/verbs/verb_sit.png" },
+    { "word": "slice", "position": "initial", "syllables": 1, "phonemes": ["s"], "image": "sprites/verbs/verb_slice.png" },
+    { "word": "stir",  "position": "initial", "syllables": 1, "phonemes": ["s"], "image": "sprites/verbs/verb_stir.png" },
+    { "word": "sing",  "position": "initial", "syllables": 1, "phonemes": ["s"], "image": "sprites/verbs/verb_sing.png" },
+    { "word": "skate", "position": "initial", "syllables": 1, "phonemes": ["s"], "image": "sprites/verbs/verb_skate.png" },
+    { "word": "skip",  "position": "initial", "syllables": 1, "phonemes": ["s"], "image": "sprites/verbs/verb_skip.png" },
+    { "word": "see",   "position": "initial", "syllables": 1, "phonemes": ["s"], "image": "sprites/verbs/verb_see.png" },
+    { "word": "smile", "position": "initial", "syllables": 1, "phonemes": ["s"], "image": "sprites/verbs/verb_smile.png" }
   ]
 }

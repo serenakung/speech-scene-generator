@@ -31,6 +31,8 @@
   <button id="makeAll">Make ALL</button>
 </div>
 
+<input id="jsonFile" type="file" accept="application/json" />
+
 <div class="row">
   <small>Tip: Your browser will download one PNG per word. You can tweak colours in code below if you like.</small>
 </div>
@@ -41,11 +43,45 @@
 const PALETTE = ["#3C91E6","#F5D547","#43C465","#E64C3C","#A47551","#8E5A30","#9C27B0","#FF9800","#607D8B"];
 const log = (t)=>{ document.getElementById('log').textContent += t + "\\n"; };
 
-async function loadWords(){
-  const res = await fetch('./data/words-library.json', { cache:'no-store' });
-  if(!res.ok) throw new Error('Failed to load data/words-library.json');
-  return res.json();
+
+let WORDS_CACHE = null;
+
+function validateWords(json){
+  if (!json || !Array.isArray(json.nouns) || !Array.isArray(json.verbs)) {
+    throw new Error('JSON must include "nouns"[] and "verbs"[] arrays.');
+  }
 }
+
+async function loadWords(){
+  // If user selected a file (works even under file://)
+  const input = document.getElementById('jsonFile');
+  if (input && input.files && input.files[0]) {
+    const text = await input.files[0].text();
+    const json = JSON.parse(text);
+    validateWords(json);
+    WORDS_CACHE = json;
+    return WORDS_CACHE;
+  }
+
+  // Try your filename first
+  try {
+    const res = await fetch('./data/words-library.json', { cache: 'no-store' });
+    if (!res.ok) throw new Error('not found');
+    const json = await res.json();
+    validateWords(json);
+    WORDS_CACHE = json;
+    return WORDS_CACHE;
+  } catch (_) { /* fall through */ }
+
+  // Fallback to words.json
+  const res2 = await fetch('./data/words.json', { cache: 'no-store' });
+  if (!res2.ok) throw new Error('Failed to load ./data/words-library.json and ./data/words.json');
+  const json2 = await res2.json();
+  validateWords(json2);
+  WORDS_CACHE = json2;
+  return WORDS_CACHE;
+}
+
 
 function makeBlockPNG(label, kind, idx, size, fontPx, outline){
   const cvs = document.createElement('canvas');
