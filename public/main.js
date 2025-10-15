@@ -49,10 +49,19 @@ function findSpot(w, h, placed, tries = 200) {
 const PALETTE = ["#3C91E6","#F5D547","#43C465","#E64C3C","#A47551","#8E5A30","#E1E1E1","#9C27B0","#FF9800"];
 function pickColor(i){ return PALETTE[i % PALETTE.length]; }
 
-function drawBackground() {
-  ctx.fillStyle = "#FFFFFF"; ctx.fillRect(0,0,CANVAS_W,CANVAS_H);
-  ctx.fillStyle = "#F3F6FA"; ctx.fillRect(0,0,CANVAS_W,Math.floor(CANVAS_H*0.28));
-  ctx.fillStyle = "#EAF5EA"; ctx.fillRect(0,Math.floor(CANVAS_H*0.28),CANVAS_W,Math.floor(CANVAS_H*0.12));
+async function drawBackground() {
+  // Randomly pick one background image path
+  const bgPath = BACKGROUNDS[Math.floor(Math.random() * BACKGROUNDS.length)];
+  const bgImg = await loadImage(bgPath);
+
+  if (bgImg) {
+    // Draw background image stretched to fill canvas
+    ctx.drawImage(bgImg, 0, 0, CANVAS_W, CANVAS_H);
+  } else {
+    // Fallback: plain colour if image missing
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fillRect(0, 0, CANVAS_W, CANVAS_H);
+  }
 }
 
 function wrapText(ctx, text, maxWidth) {
@@ -71,6 +80,18 @@ function wrapText(ctx, text, maxWidth) {
 
 // ---- Image cache & drawing ----
 const imageCache = new Map(); // src -> Promise<HTMLImageElement|null>
+
+// ---- Background images (add your own) ----
+const BACKGROUNDS = [
+  "sprites/backgrounds/bg_Castles.png",
+  "sprites/backgrounds/bg_ColorDesert.png",
+  "sprites/backgrounds/bg_ColorFall.png",
+  "sprites/backgrounds/bg_ColorForest.png",
+  "sprites/backgrounds/bg_ColorGrass.png",
+  "sprites/backgrounds/bg_Desert.png",
+  "sprites/backgrounds/bg_Empty.png",
+  "sprites/backgrounds/bg_Forest.png",
+];
 
 function loadImage(src) {
   if (!src) return Promise.resolve(null);
@@ -151,7 +172,7 @@ function randBetween(a, b) { return Math.floor(Math.random() * (b - a + 1)) + a;
 async function generate() {
   if (!WORDS) await loadWords();
 
-  drawBackground();
+ await drawBackground();
 
   const phonSel = phonemeChecks();
   const posSel  = positionChecks();
