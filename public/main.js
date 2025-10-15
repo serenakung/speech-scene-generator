@@ -19,7 +19,7 @@ let WORDS = null; // loaded from JSON
 
 // ---- Word bank loader ----
 async function loadWords() {
-  const res = await fetch('./data/words.json', { cache: 'no-store' });
+  const res = await fetch('./data/words-library.json', { cache: 'no-store' });
   if (!res.ok) throw new Error('Failed to load ./data/words.json');
   const json = await res.json();
   if (!json?.nouns || !json?.verbs) throw new Error('words.json must include "nouns"[] and "verbs"[]');
