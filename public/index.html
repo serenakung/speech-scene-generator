@@ -45,13 +45,14 @@
         </select>
       </label>
 
-      <label> Items:
-        <input id="count" type="number" min="1" max="24" value="12" />
+      <!-- in Sentence mode, this is the number of sentences (1–6). In other modes, it's items count -->
+      <label id="countLabel"> Count:
+        <input id="count" type="number" min="1" max="24" value="1" />
       </label>
 
       <label class="row"><input id="showLabels" type="checkbox" checked /> Show labels</label>
       <label class="row"><input id="outline" type="checkbox" /> Add outlines (fallback blocks)</label>
-      <label class="row"><input id="useBackgrounds" type="checkbox" checked /> Random background</label>
+      <label class="row"><input id="useBackgrounds" type="checkbox" checked /> Random background (Sentence only)</label>
 
       <button id="generate">Generate</button>
       <button id="exportPng">Export PNG (A4)</button>

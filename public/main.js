@@ -1,4 +1,4 @@
-// ====== Speech Scenes — main.js (Backgrounds restored + Sentence mode + Audit + Usage) ======
+// ====== Speech Scenes — main.js (Multi-sentence placement + no-overlap) ======
 
 // ---- Constants & UI refs ----
 const CANVAS_W = 2480, CANVAS_H = 3508; // A4 @ 300dpi
@@ -10,6 +10,7 @@ const positionChecks = () => [...document.querySelectorAll('input[name="position
 
 const sceneTypeEl  = document.getElementById('sceneType');
 const countEl      = document.getElementById('count');
+const countLabelEl = document.getElementById('countLabel');
 const targetsEl    = document.getElementById('targets');
 const showLabelsEl = document.getElementById('showLabels');
 const outlineEl    = document.getElementById('outline');
@@ -18,12 +19,23 @@ const useBgsEl     = document.getElementById('useBackgrounds');
 let WORDS = null; // loaded from JSON
 let BG_LIST = null; // loaded from backgrounds.json or fallback
 
+// ---- UI nicety: change Count label/max when Sentence mode is selected ----
+function refreshCountLabel() {
+  if (sceneTypeEl.value === 'sentence') {
+    countLabelEl.firstChild.textContent = ' Sentences: ';
+    countEl.min = 1; countEl.max = 6;
+    if (parseInt(countEl.value,10) > 6) countEl.value = 6;
+  } else {
+    countLabelEl.firstChild.textContent = ' Count: ';
+    countEl.min = 1; countEl.max = 24;
+  }
+}
+sceneTypeEl.addEventListener('change', refreshCountLabel);
+refreshCountLabel();
+
 // ---- Background list loader ----
-// Prefer data/backgrounds.json (easy to edit); fall back to a hardcoded list.
-// You can mix .png and .jpg — just make sure the paths are correct.
 async function loadBackgroundList() {
   if (BG_LIST) return BG_LIST;
-  // Try manifest first
   try {
     const res = await fetch('./data/backgrounds.json', { cache: 'no-store' });
     if (res.ok) {
@@ -34,29 +46,22 @@ async function loadBackgroundList() {
         return BG_LIST;
       }
     }
-  } catch (e) {
-    // ignore, use fallback
-  }
-  // Fallback (edit these if you don't want a manifest)
+  } catch (e) { /* fall back */ }
   BG_LIST = [
-    "sprites/backgrounds/bg_beach.jpg",
-    "sprites/backgrounds/bg_Castles.png",
     "sprites/backgrounds/bg_classroom.jpg",
-    "sprites/backgrounds/bg_ColorDesert.png",
+    "sprites/backgrounds/bg_classroom.png",
+    "sprites/backgrounds/bg_kitchen.jpg",
+    "sprites/backgrounds/bg_kitchen.png",
     "sprites/backgrounds/bg_park.jpg",
-    "sprites/backgrounds/bg_ColorFall.png",
-    "sprites/backgrounds/bg_ColorForest.jpg",
-    "sprites/backgrounds/bg_ColorGrass.png",
-    "sprites/backgrounds/bg_Desert.png",
-    "sprites/backgrounds/bg_Empty.png",
-    "sprites/backgrounds/bg_Forest.png",
-    "sprites/backgrounds/bg_street.jpg"
+    "sprites/backgrounds/bg_park.png",
+    "sprites/backgrounds/bg_playground.jpg",
+    "sprites/backgrounds/bg_playground.png"
   ];
   console.log('[backgrounds] using fallback list with', BG_LIST.length, 'items');
   return BG_LIST;
 }
 
-// ---- Word bank loader (tries words-library.json then words.json) ----
+// ---- Word bank loader ----
 async function loadWords() {
   const tryFetch = async (path) => {
     try {
@@ -84,12 +89,15 @@ function rectsOverlap(a, b, pad = 8) {
     a.y > b.y + b.h + pad
   );
 }
-function findSpot(w, h, placed, tries = 200) {
+function findSpot(w, h, placed, margin = 80, tries = 300) {
+  const minX = margin, maxX = CANVAS_W - margin - w;
+  const minY = margin, maxY = CANVAS_H - margin - h;
+  if (maxX < minX || maxY < minY) return null;
   for (let i = 0; i < tries; i++) {
-    const x = Math.floor(Math.random() * (CANVAS_W - w));
-    const y = Math.floor(Math.random() * (CANVAS_H - h));
+    const x = Math.floor(Math.random() * (maxX - minX + 1)) + minX;
+    const y = Math.floor(Math.random() * (maxY - minY + 1)) + minY;
     const candidate = { x, y, w, h };
-    if (!placed.some(r => rectsOverlap(candidate, r))) return candidate;
+    if (!placed.some(r => rectsOverlap(candidate, r, 16))) return candidate;
   }
   return null;
 }
@@ -119,13 +127,13 @@ function drawBlock(x, y, w, h, outline) {
 function drawLabelInRect(x, y, w, h, label) {
   ctx.save();
   ctx.fillStyle = "#111";
-  ctx.font = "bold 64px system-ui, sans-serif";
+  ctx.font = "bold 56px system-ui, sans-serif";
   ctx.textBaseline = "top";
   const pad = 16;
   const maxWidth = w - pad*2;
   const lines = wrapText(ctx, label, maxWidth);
   let ty = y + pad;
-  for (const line of lines) { ctx.fillText(line, x + pad, ty); ty += 72; }
+  for (const line of lines) { ctx.fillText(line, x + pad, ty); ty += 64; }
   ctx.restore();
 }
 
@@ -156,28 +164,22 @@ function drawImageFit(img, x, y, w, h, pad = 16) {
   ctx.drawImage(img, dx, dy, dw, dh);
 }
 
-// ---- Background drawing: optional random background for SENTENCE only ----
+// ---- Background drawing: random ONLY for Sentence; plain for others ----
 async function drawBackground() {
-  const scene = document.getElementById("sceneType").value;
-
-  // If not a sentence scene → plain white background only
+  const scene = sceneTypeEl.value;
   if (scene !== "sentence" || !useBgsEl.checked) {
     ctx.fillStyle = "#FFFFFF";
     ctx.fillRect(0, 0, CANVAS_W, CANVAS_H);
     return;
   }
-
-  // Otherwise: random background (only for "sentence")
   const list = await loadBackgroundList();
   if (!list || !list.length) {
     ctx.fillStyle = "#FFFFFF";
     ctx.fillRect(0, 0, CANVAS_W, CANVAS_H);
     return;
   }
-
   const bgPath = list[Math.floor(Math.random() * list.length)];
   const bg = await loadImage(bgPath);
-
   if (bg) {
     const scale = Math.max(CANVAS_W / bg.width, CANVAS_H / bg.height);
     const dw = bg.width * scale;
@@ -191,12 +193,11 @@ async function drawBackground() {
   }
 }
 
-
 // ---- Draw an item: image if present, else placeholder block + label ----
 async function drawItem({ item, rect, outline, showLabel }) {
   const img = await loadImage(item.image);
   if (img) {
-    drawImageFit(img, rect.x, rect.y, rect.w, rect.h, 20);
+    drawImageFit(img, rect.x, rect.y, rect.w, rect.h, 16);
   } else {
     drawBlock(rect.x, rect.y, rect.w, rect.h, outline);
   }
@@ -232,7 +233,7 @@ function exportUsageCSV() {
   a.download = 'usage_log.csv'; a.click(); URL.revokeObjectURL(a.href);
 }
 
-// ---- Assets audit (which sprites are missing/broken) ----
+// ---- Assets audit ----
 async function auditAssets() {
   if (!WORDS) await loadWords();
   const missing = [];
@@ -252,7 +253,7 @@ async function auditAssets() {
   a.download = 'assets_audit.json'; a.click(); URL.revokeObjectURL(a.href);
 }
 
-// ---- Verb→Object suggestion map (simple starter) ----
+// ---- Verb→Object suggestion map ----
 const VERB_OBJECT_SUGGESTIONS = {
   "sip": ["cup", "mug", "juice"],
   "slice": ["sandwich", "bread", "cake"],
@@ -275,7 +276,20 @@ function drawCharacterPlaceholder(x, y, w, h, label="person") {
   drawLabelInRect(x, y, w, h, label);
 }
 
-// ---- Sentence scene ----
+// ---- Layout helpers for sentence vignettes ----
+// Returns block size & gaps based on number of sentences.
+function sentenceBlockMetrics(nSentences) {
+  if (nSentences <= 2) return { W: 520, H: 520, gapVerbObj: 28, gapCharVerb: 80 };
+  if (nSentences <= 4) return { W: 420, H: 420, gapVerbObj: 24, gapCharVerb: 72 };
+  return { W: 320, H: 320, gapVerbObj: 20, gapCharVerb: 64 }; // 5–6 sentences
+}
+// Group (character + verb + object) total width/height
+function groupSize(metrics) {
+  const { W, H, gapVerbObj, gapCharVerb } = metrics;
+  return { Gw: W + gapCharVerb + W + gapVerbObj + W, Gh: H };
+}
+
+// ---- Sentence scene (multi) ----
 async function generateSentenceScene() {
   if (!WORDS) await loadWords();
   await drawBackground();
@@ -286,67 +300,84 @@ async function generateSentenceScene() {
     targetsEl.innerHTML = `<p class="error">Select at least one phoneme and one position.</p>`;
     return;
   }
+  // Number of sentences (1–6)
+  const nSentences = Math.max(1, Math.min(6, parseInt(countEl.value, 10) || 1));
+  const metrics = sentenceBlockMetrics(nSentences);
+  const { W, H, gapVerbObj, gapCharVerb } = metrics;
+  const { Gw, Gh } = groupSize(metrics);
 
-  const verbPool = pool('actions', phonSel, posSel);
-  if (!verbPool.length) { targetsEl.innerHTML = `<p class="error">No verbs match your filters.</p>`; return; }
-  const verb = sample(verbPool, 1)[0];
+  // Build sentences (verb + object pairing each time)
+  const sentences = [];
+  for (let s = 0; s < nSentences; s++) {
+    // Verb pool (allow repeats if needed)
+    const verbPool = pool('actions', phonSel, posSel);
+    if (!verbPool.length) break;
+    const verb = sample(verbPool, 1)[0];
 
-  let object = null;
-  const suggestions = VERB_OBJECT_SUGGESTIONS[verb.word?.toLowerCase()] || [];
-  for (const suggested of suggestions) {
-    const candidate = findNounByWord(suggested);
-    if (candidate) { object = candidate; break; }
+    let object = null;
+    const suggestions = VERB_OBJECT_SUGGESTIONS[verb.word?.toLowerCase()] || [];
+    for (const suggested of suggestions) {
+      const candidate = findNounByWord(suggested);
+      if (candidate) { object = candidate; break; }
+    }
+    if (!object) {
+      const nounPool = pool('i-spy', phonSel, posSel);
+      if (nounPool.length) object = sample(nounPool, 1)[0];
+    }
+    if (!object) continue;
+
+    sentences.push({ verb, object });
   }
-  if (!object) {
-    const nounPool = pool('i-spy', phonSel, posSel);
-    if (nounPool.length) object = sample(nounPool, 1)[0];
+  if (!sentences.length) {
+    targetsEl.innerHTML = `<p class="error">No valid verb–noun pairs could be formed. Add more words or relax filters.</p>`;
+    return;
   }
-  if (!object) { targetsEl.innerHTML = `<p class="error">No nouns available to pair with the verb.</p>`; return; }
 
-  // Layout (verb & object adjacent)
-  const margin = 160, gapTight = 32;
-  const W = 520, H = 520;
-  const y = Math.floor(CANVAS_H * 0.58);
+  // Randomly place each sentence group without overlap
+  const placedGroups = [];
+  const margin = 80;
+  for (const { verb, object } of sentences) {
+    const spot = findSpot(Gw, Gh, placedGroups, margin, 500);
+    if (!spot) continue; // skip if no room found
+    placedGroups.push(spot);
 
-  const xChar = margin;
-  const xVerb = xChar + W + 80;
-  const xObj  = xVerb + W + gapTight;
+    // Character
+    const xChar = spot.x;
+    const y = spot.y;
+    const xVerb = xChar + W + gapCharVerb;
+    const xObj  = xVerb + W + gapVerbObj;
 
-  drawCharacterPlaceholder(xChar, y, W, H, "person");
+    // Draw character placeholder
+    drawCharacterPlaceholder(xChar, y, W, H, "person");
 
-  const verbRect = { x: xVerb, y, w: W, h: H };
-  const verbImg = await loadImage(verb.image);
-  if (verbImg) drawImageFit(verbImg, verbRect.x, verbRect.y, verbRect.w, verbRect.h, 20);
-  else drawBlock(verbRect.x, verbRect.y, verbRect.w, verbRect.h, outlineEl.checked);
-  if (showLabelsEl.checked) drawLabelInRect(verbRect.x, verbRect.y, verbRect.w, verbRect.h, verb.word);
+    // Draw verb
+    const verbRect = { x: xVerb, y, w: W, h: H };
+    const verbImg = await loadImage(verb.image);
+    if (verbImg) drawImageFit(verbImg, verbRect.x, verbRect.y, verbRect.w, verbRect.h, 16);
+    else drawBlock(verbRect.x, verbRect.y, verbRect.w, verbRect.h, outlineEl.checked);
+    if (showLabelsEl.checked) drawLabelInRect(verbRect.x, verbRect.y, verbRect.w, verbRect.h, verb.word);
 
-  const objRect = { x: xObj, y, w: W, h: H };
-  const objImg = await loadImage(object.image);
-  if (objImg) drawImageFit(objImg, objRect.x, objRect.y, objRect.w, objRect.h, 20);
-  else drawBlock(objRect.x, objRect.y, objRect.w, objRect.h, outlineEl.checked);
-  if (showLabelsEl.checked) drawLabelInRect(objRect.x, objRect.y, objRect.w, objRect.h, object.word);
+    // Draw object (helper noun) — right next to the verb
+    const objRect = { x: xObj, y, w: W, h: H };
+    const objImg = await loadImage(object.image);
+    if (objImg) drawImageFit(objImg, objRect.x, objRect.y, objRect.w, objRect.h, 16);
+    else drawBlock(objRect.x, objRect.y, objRect.w, objRect.h, outlineEl.checked);
+    if (showLabelsEl.checked) drawLabelInRect(objRect.x, objRect.y, objRect.w, objRect.h, object.word);
 
-  ctx.save();
-  ctx.fillStyle = "#111";
-  ctx.font = "bold 72px system-ui, sans-serif";
-  ctx.textAlign = "center";
-  ctx.textBaseline = "top";
-  const caption = `The person ${verb.word} the ${object.word}.`;
-  ctx.fillText(caption, CANVAS_W / 2, y + H + 48, CANVAS_W - margin*2);
-  ctx.restore();
+    // Log usage
+    logUsage({ mode: `sentence-${nSentences}`, verb: verb.word, noun: object.word });
+  }
 
-  targetsEl.innerHTML = `
-    <h3>Sentence:</h3>
-    <ul>
-      <li>Subject: person</li>
-      <li>Verb: ${verb.word}</li>
-      <li>Object: ${object.word}</li>
-    </ul>`;
-
-  logUsage({ mode: 'sentence', verb: verb.word, noun: object.word });
+  // Targets panel
+  const lines = placedGroups.length
+    ? sentences.slice(0, placedGroups.length).map(({verb,object}) => `<li>The person <strong>${verb.word}</strong> the <strong>${object.word}</strong>.</li>`)
+    : [];
+  targetsEl.innerHTML = placedGroups.length
+    ? `<h3>Sentences on this page (${placedGroups.length}):</h3><ul>${lines.join("")}</ul>`
+    : `<p class="error">Couldn’t fit any sentences. Try reducing the number or widen margins/sizes.</p>`;
 }
 
-// ---- Other modes ----
+// ---- Other modes (unchanged layout, plain background) ----
 async function generateIspyOrActionsOrMixed() {
   await drawBackground();
 
@@ -379,7 +410,7 @@ async function generateIspyOrActionsOrMixed() {
     const isVerb = item.kind === 'verb';
     const W = isVerb ? randBetween(280, 420) : randBetween(360, 560);
     const H = isVerb ? randBetween(180, 260) : randBetween(220, 320);
-    const spot = findSpot(W, H, placed);
+    const spot = findSpot(W, H, placed, 60, 200);
     if (!spot) continue;
 
     placed.push({ x: spot.x, y: spot.y, w: W, h: H });
