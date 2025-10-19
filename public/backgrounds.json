@@ -1,0 +1,16 @@
+{
+  "backgrounds": [
+    "sprites/backgrounds/bg_beach.jpg",
+    "sprites/backgrounds/bg_Castles.png",
+    "sprites/backgrounds/bg_classroom.jpg",
+    "sprites/backgrounds/bg_ColorDesert.png",
+    "sprites/backgrounds/bg_park.jpg",
+    "sprites/backgrounds/bg_ColorFall.png",
+    "sprites/backgrounds/bg_ColorForest.jpg",
+    "sprites/backgrounds/bg_ColorGrass.png",
+    "sprites/backgrounds/bg_Desert.png",
+    "sprites/backgrounds/bg_Empty.png",
+    "sprites/backgrounds/bg_Forest.png",
+    "sprites/backgrounds/bg_street.jpg"
+  ]
+}
