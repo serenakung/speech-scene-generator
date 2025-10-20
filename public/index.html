@@ -24,6 +24,18 @@
       </div>
     </div>
 
+    <!-- NEW: Syllables checklist -->
+    <div class="group">
+      <label class="group-label">Number of syllables:</label>
+      <div class="checks">
+        <label><input type="checkbox" name="syllables" value="1"> 1</label>
+        <label><input type="checkbox" name="syllables" value="2"> 2</label>
+        <label><input type="checkbox" name="syllables" value="3"> 3</label>
+        <label><input type="checkbox" name="syllables" value="4plus"> 4+</label>
+      </div>
+      <small class="hint">Leave all unchecked to include any syllable length.</small>
+    </div>
+
     <!-- Position checklist -->
     <div class="group">
       <label class="group-label">Positions:</label>
@@ -45,9 +57,9 @@
         </select>
       </label>
 
-      <!-- in Sentence mode, this is the number of sentences (1–6). In other modes, it's items count -->
-      <label id="countLabel"> Count:
-        <input id="count" type="number" min="1" max="24" value="1" />
+      <!-- In Sentence mode this is the number of sentences (1–6). In others, items count -->
+      <label id="countLabel"> Sentences:
+        <input id="count" type="number" min="1" max="6" value="1" />
       </label>
 
       <label class="row"><input id="showLabels" type="checkbox" checked /> Show labels</label>
@@ -72,6 +84,17 @@
     Word bank at <code>public/data/words.json</code>. Backgrounds in <code>public/sprites/backgrounds/</code>.<br>
     Serve locally: <code>python -m http.server 5001</code> → open <code>http://localhost:5001</code>.
   </small></p>
+
+<!-- Error modal -->
+  <div id="errorModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="errorTitle">
+    <div class="modal-card">
+      <h2 id="errorTitle">No matches found</h2>
+      <p id="errorText">Your current filters returned no words.</p>
+      <div class="modal-actions">
+        <button id="errorClose">OK</button>
+      </div>
+    </div>
+  </div>
 </main>
 
 <script type="module" src="main.js"></script>

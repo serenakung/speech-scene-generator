@@ -1,12 +1,13 @@
-// ====== Speech Scenes — main.js (Multi-sentence placement + no-overlap) ======
+// ====== Speech Scenes — main.js (final merged) ======
 
 // ---- Constants & UI refs ----
 const CANVAS_W = 2480, CANVAS_H = 3508; // A4 @ 300dpi
 const canvas = document.getElementById('scene');
 const ctx = canvas.getContext('2d');
 
-const phonemeChecks = () => [...document.querySelectorAll('input[name="phoneme"]:checked')].map(c => c.value);
+const phonemeChecks  = () => [...document.querySelectorAll('input[name="phoneme"]:checked')].map(c => c.value);
 const positionChecks = () => [...document.querySelectorAll('input[name="position"]:checked')].map(c => c.value);
+const syllableChecks = () => [...document.querySelectorAll('input[name="syllables"]:checked')].map(c => c.value);
 
 const sceneTypeEl  = document.getElementById('sceneType');
 const countEl      = document.getElementById('count');
@@ -16,10 +17,34 @@ const showLabelsEl = document.getElementById('showLabels');
 const outlineEl    = document.getElementById('outline');
 const useBgsEl     = document.getElementById('useBackgrounds');
 
-let WORDS = null; // loaded from JSON
-let BG_LIST = null; // loaded from backgrounds.json or fallback
+let WORDS = null;   // loaded from JSON
+let BG_LIST = null; // backgrounds manifest or fallback
 
-// ---- UI nicety: change Count label/max when Sentence mode is selected ----
+// ---- Error modal helpers ----
+const errorModal = document.getElementById('errorModal');
+const errorText  = document.getElementById('errorText');
+const errorClose = document.getElementById('errorClose');
+
+function showError(message) {
+  if (errorText) errorText.textContent = message || 'Your current filters returned no words.';
+  if (errorModal) errorModal.classList.remove('hidden');
+}
+function hideError() { if (errorModal) errorModal.classList.add('hidden'); }
+if (errorClose) errorClose.addEventListener('click', hideError);
+if (errorModal) {
+  errorModal.addEventListener('click', e => { if (e.target === errorModal) hideError(); });
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') hideError(); });
+
+function filterSummary() {
+  const phon = phonemeChecks();
+  const pos  = positionChecks();
+  const syl  = syllableChecks();
+  const sylText = syl.length ? syl.map(s => (s === '4plus' ? '4+' : s)).join(', ') : 'any';
+  return `phonemes: ${phon.length ? phon.join(' · ') : 'any'}, positions: ${pos.join(' · ')}, syllables: ${sylText}`;
+}
+
+// ---- UI nicety: update Count label/max when mode changes ----
 function refreshCountLabel() {
   if (sceneTypeEl.value === 'sentence') {
     countLabelEl.firstChild.textContent = ' Sentences: ';
@@ -28,6 +53,7 @@ function refreshCountLabel() {
   } else {
     countLabelEl.firstChild.textContent = ' Count: ';
     countEl.min = 1; countEl.max = 24;
+    if (parseInt(countEl.value,10) > 24) countEl.value = 12;
   }
 }
 sceneTypeEl.addEventListener('change', refreshCountLabel);
@@ -46,7 +72,7 @@ async function loadBackgroundList() {
         return BG_LIST;
       }
     }
-  } catch (e) { /* fall back */ }
+  } catch (e) { /* ignore; fall back below */ }
   BG_LIST = [
     "sprites/backgrounds/bg_classroom.jpg",
     "sprites/backgrounds/bg_classroom.png",
@@ -164,7 +190,7 @@ function drawImageFit(img, x, y, w, h, pad = 16) {
   ctx.drawImage(img, dx, dy, dw, dh);
 }
 
-// ---- Background drawing: random ONLY for Sentence; plain for others ----
+// ---- Background drawing: random ONLY for Sentence; plain white for others ----
 async function drawBackground() {
   const scene = sceneTypeEl.value;
   if (scene !== "sentence" || !useBgsEl.checked) {
@@ -204,11 +230,28 @@ async function drawItem({ item, rect, outline, showLabel }) {
   if (showLabel) drawLabelInRect(rect.x, rect.y, rect.w, rect.h, item.word);
 }
 
-// ---- Filtering & selection ----
-function pool(type, phonemes, positions) {
+// ---- Syllable filter ----
+function matchesSyllables(item, sel) {
+  if (!sel.length) return true; // no restriction
+  const s = Number(item.syllables || 0);
+  const wants4plus = sel.includes('4plus');
+  const nums = sel.filter(v => v !== '4plus').map(v => Number(v));
+  if (wants4plus && s >= 4) return true;
+  return nums.includes(s);
+}
+
+// ---- Filtering & selection (now includes syllables) ----
+/**
+ * type: 'actions' for verbs; anything else for nouns
+ * phonemes: array of IPA symbols
+ * positions: ['initial','medial','final']
+ * syllablesSel: ['1','2','3','4plus']
+ */
+function pool(type, phonemes, positions, syllablesSel) {
   const list = (type === 'actions') ? WORDS.verbs : WORDS.nouns;
   return list.filter(item =>
     positions.includes(item.position) &&
+    matchesSyllables(item, syllablesSel || []) &&
     (Array.isArray(item.phonemes) ? item.phonemes.some(p => phonemes.includes(p)) : true)
   );
 }
@@ -277,16 +320,14 @@ function drawCharacterPlaceholder(x, y, w, h, label="person") {
 }
 
 // ---- Layout helpers for sentence vignettes ----
-// Returns block size & gaps based on number of sentences.
 function sentenceBlockMetrics(nSentences) {
   if (nSentences <= 2) return { W: 520, H: 520, gapVerbObj: 28, gapCharVerb: 80 };
   if (nSentences <= 4) return { W: 420, H: 420, gapVerbObj: 24, gapCharVerb: 72 };
   return { W: 320, H: 320, gapVerbObj: 20, gapCharVerb: 64 }; // 5–6 sentences
 }
-// Group (character + verb + object) total width/height
 function groupSize(metrics) {
-  const { W, H, gapVerbObj, gapCharVerb } = metrics;
-  return { Gw: W + gapCharVerb + W + gapVerbObj + W, Gh: H };
+  const { W, gapVerbObj, gapCharVerb } = metrics;
+  return { Gw: W + gapCharVerb + W + gapVerbObj + W, Gh: metrics.H };
 }
 
 // ---- Sentence scene (multi) ----
@@ -296,79 +337,81 @@ async function generateSentenceScene() {
 
   const phonSel = phonemeChecks();
   const posSel  = positionChecks();
+  const sylSel  = syllableChecks();
+
   if (!phonSel.length || !posSel.length) {
-    targetsEl.innerHTML = `<p class="error">Select at least one phoneme and one position.</p>`;
+    const msg = !phonSel.length ? 'Select at least one phoneme.' : 'Select at least one position.';
+    showError(msg);
+    targetsEl.innerHTML = `<p class="error">${msg}</p>`;
     return;
   }
-  // Number of sentences (1–6)
+
   const nSentences = Math.max(1, Math.min(6, parseInt(countEl.value, 10) || 1));
   const metrics = sentenceBlockMetrics(nSentences);
   const { W, H, gapVerbObj, gapCharVerb } = metrics;
   const { Gw, Gh } = groupSize(metrics);
 
-  // Build sentences (verb + object pairing each time)
   const sentences = [];
   for (let s = 0; s < nSentences; s++) {
-    // Verb pool (allow repeats if needed)
-    const verbPool = pool('actions', phonSel, posSel);
-    if (!verbPool.length) break;
+    const verbPool = pool('actions', phonSel, posSel, sylSel);
+    if (!verbPool.length) {
+      const msg = `No VERBS match your filters (${filterSummary()}). Try changing phonemes/syllables.`;
+      showError(msg);
+      targetsEl.innerHTML = `<p class="error">${msg}</p>`;
+      break;
+    }
     const verb = sample(verbPool, 1)[0];
 
     let object = null;
     const suggestions = VERB_OBJECT_SUGGESTIONS[verb.word?.toLowerCase()] || [];
     for (const suggested of suggestions) {
       const candidate = findNounByWord(suggested);
-      if (candidate) { object = candidate; break; }
+      if (candidate && matchesSyllables(candidate, sylSel) && posSel.includes(candidate.position)) { object = candidate; break; }
     }
     if (!object) {
-      const nounPool = pool('i-spy', phonSel, posSel);
-      if (nounPool.length) object = sample(nounPool, 1)[0];
+      const nounPool = pool('i-spy', phonSel, posSel, sylSel);
+      if (!nounPool.length) {
+        const msg = `No NOUNS match your filters (${filterSummary()}). Try changing phonemes/syllables.`;
+        showError(msg);
+        targetsEl.innerHTML = `<p class="error">${msg}</p>`;
+        break;
+      }
+      object = sample(nounPool, 1)[0];
     }
-    if (!object) continue;
 
     sentences.push({ verb, object });
   }
-  if (!sentences.length) {
-    targetsEl.innerHTML = `<p class="error">No valid verb–noun pairs could be formed. Add more words or relax filters.</p>`;
-    return;
-  }
+  if (!sentences.length) return;
 
-  // Randomly place each sentence group without overlap
   const placedGroups = [];
   const margin = 80;
   for (const { verb, object } of sentences) {
     const spot = findSpot(Gw, Gh, placedGroups, margin, 500);
-    if (!spot) continue; // skip if no room found
+    if (!spot) continue;
     placedGroups.push(spot);
 
-    // Character
     const xChar = spot.x;
     const y = spot.y;
     const xVerb = xChar + W + gapCharVerb;
     const xObj  = xVerb + W + gapVerbObj;
 
-    // Draw character placeholder
     drawCharacterPlaceholder(xChar, y, W, H, "person");
 
-    // Draw verb
     const verbRect = { x: xVerb, y, w: W, h: H };
     const verbImg = await loadImage(verb.image);
     if (verbImg) drawImageFit(verbImg, verbRect.x, verbRect.y, verbRect.w, verbRect.h, 16);
     else drawBlock(verbRect.x, verbRect.y, verbRect.w, verbRect.h, outlineEl.checked);
     if (showLabelsEl.checked) drawLabelInRect(verbRect.x, verbRect.y, verbRect.w, verbRect.h, verb.word);
 
-    // Draw object (helper noun) — right next to the verb
     const objRect = { x: xObj, y, w: W, h: H };
     const objImg = await loadImage(object.image);
     if (objImg) drawImageFit(objImg, objRect.x, objRect.y, objRect.w, objRect.h, 16);
     else drawBlock(objRect.x, objRect.y, objRect.w, objRect.h, outlineEl.checked);
     if (showLabelsEl.checked) drawLabelInRect(objRect.x, objRect.y, objRect.w, objRect.h, object.word);
 
-    // Log usage
     logUsage({ mode: `sentence-${nSentences}`, verb: verb.word, noun: object.word });
   }
 
-  // Targets panel
   const lines = placedGroups.length
     ? sentences.slice(0, placedGroups.length).map(({verb,object}) => `<li>The person <strong>${verb.word}</strong> the <strong>${object.word}</strong>.</li>`)
     : [];
@@ -377,29 +420,61 @@ async function generateSentenceScene() {
     : `<p class="error">Couldn’t fit any sentences. Try reducing the number or widen margins/sizes.</p>`;
 }
 
-// ---- Other modes (unchanged layout, plain background) ----
+// ---- Other modes (I-spy / Actions / Mixed) ----
 async function generateIspyOrActionsOrMixed() {
   await drawBackground();
 
   const phonSel = phonemeChecks();
   const posSel  = positionChecks();
+  const sylSel  = syllableChecks();
   const type = sceneTypeEl.value;
   const n = Math.max(1, Math.min(24, parseInt(countEl.value, 10) || 12));
   const showLabels = showLabelsEl.checked;
   const outline = outlineEl.checked;
 
   if (!phonSel.length || !posSel.length) {
-    targetsEl.innerHTML = `<p class="error">Select at least one phoneme and one position.</p>`;
+    const msg = !phonSel.length ? 'Select at least one phoneme.' : 'Select at least one position.';
+    showError(msg);
+    targetsEl.innerHTML = `<p class="error">${msg}</p>`;
     return;
+  }
+
+  // Pre-check pools for zero results caused by filters
+  if (type === 'i-spy') {
+    const nounsPool = pool('i-spy', phonSel, posSel, sylSel);
+    if (!nounsPool.length) {
+      const msg = `No NOUNS match your filters (${filterSummary()}). Try changing phonemes/syllables.`;
+      showError(msg);
+      targetsEl.innerHTML = `<p class="error">${msg}</p>`;
+      return;
+    }
+  } else if (type === 'actions') {
+    const verbsPool = pool('actions', phonSel, posSel, sylSel);
+    if (!verbsPool.length) {
+      const msg = `No VERBS match your filters (${filterSummary()}). Try changing phonemes/syllables.`;
+      showError(msg);
+      targetsEl.innerHTML = `<p class="error">${msg}</p>`;
+      return;
+    }
+  } else if (type === 'mixed') {
+    const nounsPool = pool('i-spy', phonSel, posSel, sylSel);
+    const verbsPool = pool('actions', phonSel, posSel, sylSel);
+    if (!nounsPool.length && !verbsPool.length) {
+      const msg = `No NOUNS or VERBS match your filters (${filterSummary()}). Try changing phonemes/syllables.`;
+      showError(msg);
+      targetsEl.innerHTML = `<p class="error">${msg}</p>`;
+      return;
+    }
   }
 
   let selection = [];
   if (type === 'mixed') {
-    const nouns = sample(pool('i-spy', phonSel, posSel), Math.ceil(n * 0.6)).map(x => ({...x, kind:'noun'}));
-    const verbs = sample(pool('actions', phonSel, posSel), Math.floor(n * 0.4)).map(x => ({...x, kind:'verb'}));
+    const nouns = sample(pool('i-spy', phonSel, posSel, sylSel), Math.ceil(n * 0.6)).map(x => ({...x, kind:'noun'}));
+    const verbs = sample(pool('actions', phonSel, posSel, sylSel), Math.floor(n * 0.4)).map(x => ({...x, kind:'verb'}));
     selection = [...nouns, ...verbs];
   } else {
-    selection = sample(pool(type, phonSel, posSel), n).map(x => ({...x, kind: type === 'actions' ? 'verb' : 'noun'}));
+    selection = sample(pool(type, phonSel, posSel, sylSel), n)
+      .map(x => ({...x, kind: type === 'actions' ? 'verb' : 'noun'}));
   }
 
   const placed = [];
@@ -422,7 +497,7 @@ async function generateIspyOrActionsOrMixed() {
 
   targetsEl.innerHTML = selection.length
     ? `<h3>Targets in this picture:</h3><ul>${drawnTargets.map(t => `<li>${t}</li>`).join("")}</ul>`
-    : `<p class="error">No items matched your selections. Add words to <code>data/words-library.json</code>.</p>`;
+    : `<p class="error">No items matched your selections. Add words to <code>data/words.json</code>.</p>`;
 }
 
 // ---- Main generate dispatcher ----
@@ -455,5 +530,5 @@ Promise.all([loadWords(), loadBackgroundList()])
   .then(generate)
   .catch(err => {
     console.error(err);
-    targetsEl.innerHTML = `<p class="error">Startup error. Check that <code>data/words-library.json</code> (or words-library.json) and optional <code>data/backgrounds.json</code> exist, and that you're serving via <code>http://</code>.</p>`;
+    targetsEl.innerHTML = `<p class="error">Startup error. Check that <code>data/words.json</code> (or words-library.json) and optional <code>data/backgrounds.json</code> exist, and that you're serving via <code>http://</code>.</p>`;
   });

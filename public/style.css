@@ -17,3 +17,23 @@ canvas { width: 620px; height: 878px; image-rendering: optimizeQuality; }
 #targets { margin-top: 12px; }
 .hint { color: var(--muted); }
 .error { color: #b00; }
+/* Error modal */
+.modal.hidden { display: none; }
+.modal {
+  position: fixed; inset: 0; background: rgba(0,0,0,.45);
+  display: grid; place-items: center; z-index: 9999;
+}
+.modal-card {
+  width: min(520px, 90vw);
+  background: #fff; border-radius: 12px; padding: 20px 20px 16px;
+  box-shadow: 0 14px 40px rgba(0,0,0,.25);
+  border: 1px solid var(--border);
+}
+.modal-card h2 { margin: 0 0 8px; font-size: 1.1rem; }
+.modal-card p  { margin: 0 0 14px; color: var(--muted); }
+.modal-actions { display: flex; justify-content: flex-end; gap: 8px; }
+.modal-actions button {
+  appearance: none; border: 1px solid var(--border); border-radius: 8px;
+  padding: 8px 12px; background: #f5f5f5; cursor: pointer;
+}
+.modal-actions button:hover { background: #eee; }
