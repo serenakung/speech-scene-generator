@@ -1,198 +1,2554 @@
 {
   "nouns": [
-    { "word": "sun",       "position": "initial", "syllables": 1, "phonemes": ["s"], "slug": "sun",        "categories": ["nature"],          "image": "sprites/objects/obj_sun.png" },
-    { "word": "sock",      "position": "initial", "syllables": 1, "phonemes": ["s"], "slug": "sock",       "categories": ["clothing"],        "image": "sprites/objects/obj_sock.png" },
-    { "word": "soup",      "position": "initial", "syllables": 1, "phonemes": ["s"], "slug": "soup",       "categories": ["food","beverage"], "image": "sprites/objects/obj_soup.png" },
-    { "word": "sandwich",  "position": "initial", "syllables": 2, "phonemes": ["s"], "slug": "sandwich",   "categories": ["food"],            "image": "sprites/objects/obj_sandwich.png" },
+    {
+      "word": "cello",
+      "syllables": 2,
+      "position": "initial",
+      "phonemes": [
+        "ch"
+      ],
+      "source": "ch-initial",
+      "slug": "cello",
+      "image": "sprites/objects/obj_cello.png",
+      "categories": [
+        "music",
+        "objects"
+      ]
+    },
+    {
+      "word": "chain",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "ch"
+      ],
+      "source": "ch-initial",
+      "slug": "chain",
+      "image": "sprites/objects/obj_chain.png",
+      "categories": [
+        "objects"
+      ]
+    },
+    {
+      "word": "chair",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "ch"
+      ],
+      "source": "ch-initial",
+      "slug": "chair",
+      "image": "sprites/household/house_chair.png",
+      "categories": [
+        "furniture",
+        "household items"
+      ]
+    },
+    {
+      "word": "cheese",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "ch"
+      ],
+      "source": "ch-initial",
+      "slug": "cheese",
+      "image": "sprites/food/food_cheese.png",
+      "categories": [
+        "food"
+      ]
+    },
+    {
+      "word": "cheetah",
+      "syllables": 2,
+      "position": "initial",
+      "phonemes": [
+        "ch"
+      ],
+      "source": "ch-initial",
+      "slug": "cheetah",
+      "image": "sprites/animals/ani_cheetah.png",
+      "categories": [
+        "animals"
+      ]
+    },
+    {
+      "word": "cherry",
+      "syllables": 2,
+      "position": "initial",
+      "phonemes": [
+        "ch"
+      ],
+      "source": "ch-initial",
+      "slug": "cherry",
+      "image": "sprites/food/food_cherry.png",
+      "categories": [
+        "food"
+      ]
+    },
+    {
+      "word": "chicken",
+      "syllables": 2,
+      "position": "initial",
+      "phonemes": [
+        "ch"
+      ],
+      "source": "ch-initial",
+      "slug": "chicken",
+      "image": "sprites/animals/ani_chicken.png",
+      "categories": [
+        "animals",
+        "food"
+      ]
+    },
+    {
+      "word": "chips",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "ch"
+      ],
+      "source": "ch-initial",
+      "slug": "chips",
+      "image": "sprites/food/food_chips.png",
+      "categories": [
+        "food"
+      ]
+    },
+    {
+      "word": "chocolate",
+      "syllables": 3,
+      "position": "initial",
+      "phonemes": [
+        "ch"
+      ],
+      "source": "ch-initial",
+      "slug": "chocolate",
+      "image": "sprites/food/food_chocolate.png",
+      "categories": [
+        "food"
+      ]
+    },
+    {
+      "word": "church",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "ch"
+      ],
+      "source": "ch-initial",
+      "slug": "church",
+      "image": "sprites/places/place_church.png",
+      "categories": [
+        "places",
+        "buildings"
+      ]
+    },
+    {
+      "word": "boots",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "b"
+      ],
+      "source": "b-initial",
+      "slug": "boots",
+      "image": "sprites/clothing/clo_boots.png",
+      "categories": [
+        "clothing"
+      ]
+    },
+    {
+      "word": "bath",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "b"
+      ],
+      "source": "b-initial",
+      "slug": "bath",
+      "image": "sprites/household/house_bath.png",
+      "categories": [
+        "household items",
+        "bathroom"
+      ]
+    },
+    {
+      "word": "bus",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "b"
+      ],
+      "source": "b-initial",
+      "slug": "bus",
+      "image": "sprites/transport/tr_bus.png",
+      "categories": [
+        "transportation"
+      ]
+    },
+    {
+      "word": "bird",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "b"
+      ],
+      "source": "b-initial",
+      "slug": "bird",
+      "image": "sprites/animals/ani_bird.png",
+      "categories": [
+        "animals"
+      ]
+    },
+    {
+      "word": "ball",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "b"
+      ],
+      "source": "b-initial",
+      "slug": "ball",
+      "image": "sprites/toys/toy_ball.png",
+      "categories": [
+        "toys & games",
+        "sports"
+      ]
+    },
+    {
+      "word": "salad",
+      "syllables": 2,
+      "position": "initial",
+      "phonemes": [
+        "s"
+      ],
+      "source": "s-initial",
+      "slug": "salad",
+      "image": "sprites/food/food_salad.png",
+      "categories": [
+        "food"
+      ]
+    },
+    {
+      "word": "sandwich",
+      "syllables": 2,
+      "position": "initial",
+      "phonemes": [
+        "s"
+      ],
+      "source": "s-initial",
+      "slug": "sandwich",
+      "image": "sprites/food/food_sandwich.png",
+      "categories": [
+        "food"
+      ]
+    },
+    {
+      "word": "scissors",
+      "syllables": 2,
+      "position": "initial",
+      "phonemes": [
+        "s"
+      ],
+      "source": "s-initial",
+      "slug": "scissors",
+      "image": "sprites/tools/tool_scissors.png",
+      "categories": [
+        "tools"
+      ]
+    },
+    {
+      "word": "sun",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "s"
+      ],
+      "source": "s-initial",
+      "slug": "sun",
+      "image": "sprites/nature/nat_sun.png",
+      "categories": [
+        "nature",
+        "weather"
+      ]
+    },
+    {
+      "word": "suitcase",
+      "syllables": 2,
+      "position": "initial",
+      "phonemes": [
+        "s"
+      ],
+      "source": "s-initial",
+      "slug": "suitcase",
+      "image": "sprites/objects/obj_suitcase.png",
+      "categories": [
+        "objects",
+        "travel"
+      ]
+    },
+    {
+      "word": "summer",
+      "syllables": 2,
+      "position": "initial",
+      "phonemes": [
+        "s"
+      ],
+      "source": "s-initial",
+      "slug": "summer",
+      "image": "sprites/nature/nat_summer.png",
+      "categories": [
+        "nature",
+        "weather"
+      ]
+    },
+    {
+      "word": "soap",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "s"
+      ],
+      "source": "s-initial",
+      "slug": "soap",
+      "image": "sprites/household/house_soap.png",
+      "categories": [
+        "household items"
+      ]
+    },
+    {
+      "word": "sock",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "s"
+      ],
+      "source": "s-initial",
+      "slug": "sock",
+      "image": "sprites/clothing/clo_sock.png",
+      "categories": [
+        "clothing"
+      ]
+    },
+    {
+      "word": "soup",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "s"
+      ],
+      "source": "s-initial",
+      "slug": "soup",
+      "image": "sprites/food/food_soup.png",
+      "categories": [
+        "food",
+        "beverage"
+      ]
+    },
+    {
+      "word": "sea",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "s"
+      ],
+      "source": "s-initial",
+      "slug": "sea",
+      "image": "sprites/nature/nat_sea.png",
+      "categories": [
+        "nature",
+        "places"
+      ]
+    },
+    {
+      "word": "wagon",
+      "syllables": 2,
+      "position": "medial",
+      "phonemes": [
+        "g"
+      ],
+      "source": "g-medial",
+      "slug": "wagon",
+      "image": "sprites/transport/tr_wagon.png",
+      "categories": [
+        "transportation"
+      ]
+    },
+    {
+      "word": "dragon",
+      "syllables": 2,
+      "position": "medial",
+      "phonemes": [
+        "g"
+      ],
+      "source": "g-medial",
+      "slug": "dragon",
+      "image": "sprites/animals/ani_dragon.png",
+      "categories": [
+        "animals"
+      ]
+    },
+    {
+      "word": "target",
+      "syllables": 2,
+      "position": "medial",
+      "phonemes": [
+        "g"
+      ],
+      "source": "g-medial",
+      "slug": "target",
+      "image": "sprites/objects/obj_target.png",
+      "categories": [
+        "objects"
+      ]
+    },
+    {
+      "word": "lego",
+      "syllables": 2,
+      "position": "medial",
+      "phonemes": [
+        "g"
+      ],
+      "source": "g-medial",
+      "slug": "lego",
+      "image": "sprites/toys/toy_lego.png",
+      "categories": [
+        "toys & games"
+      ]
+    },
+    {
+      "word": "nuggets",
+      "syllables": 2,
+      "position": "medial",
+      "phonemes": [
+        "g"
+      ],
+      "source": "g-medial",
+      "slug": "nuggets",
+      "image": "sprites/food/food_nuggets.png",
+      "categories": [
+        "food"
+      ]
+    },
+    {
+      "word": "bagel",
+      "syllables": 2,
+      "position": "medial",
+      "phonemes": [
+        "g"
+      ],
+      "source": "g-medial",
+      "slug": "bagel",
+      "image": "sprites/food/food_bagel.png",
+      "categories": [
+        "food"
+      ]
+    },
+    {
+      "word": "alligator",
+      "syllables": 4,
+      "position": "medial",
+      "phonemes": [
+        "g"
+      ],
+      "source": "g-medial",
+      "slug": "alligator",
+      "image": "sprites/animals/ani_alligator.png",
+      "categories": [
+        "animals"
+      ]
+    },
+    {
+      "word": "burger",
+      "syllables": 2,
+      "position": "medial",
+      "phonemes": [
+        "g"
+      ],
+      "source": "g-medial",
+      "slug": "burger",
+      "image": "sprites/food/food_burger.png",
+      "categories": [
+        "food"
+      ]
+    },
+    {
+      "word": "finger",
+      "syllables": 2,
+      "position": "medial",
+      "phonemes": [
+        "g"
+      ],
+      "source": "g-medial",
+      "slug": "finger",
+      "image": "sprites/body/body_finger.png",
+      "categories": [
+        "body parts"
+      ]
+    },
+    {
+      "word": "luggage",
+      "syllables": 2,
+      "position": "medial",
+      "phonemes": [
+        "g"
+      ],
+      "source": "g-medial",
+      "slug": "luggage",
+      "image": "sprites/objects/obj_luggage.png",
+      "categories": [
+        "objects",
+        "travel"
+      ]
+    },
+    {
+      "word": "marker",
+      "syllables": 2,
+      "position": "medial",
+      "phonemes": [
+        "k"
+      ],
+      "source": "k-medial",
+      "slug": "marker",
+      "image": "sprites/places/place_marker.png",
+      "categories": [
+        "school",
+        "objects"
+      ]
+    },
+    {
+      "word": "cookie",
+      "syllables": 2,
+      "position": "medial",
+      "phonemes": [
+        "k"
+      ],
+      "source": "k-medial",
+      "slug": "cookie",
+      "image": "sprites/food/food_cookie.png",
+      "categories": [
+        "food"
+      ]
+    },
+    {
+      "word": "rocket",
+      "syllables": 2,
+      "position": "medial",
+      "phonemes": [
+        "k"
+      ],
+      "source": "k-medial",
+      "slug": "rocket",
+      "image": "sprites/transport/tr_rocket.png",
+      "categories": [
+        "transportation",
+        "space"
+      ]
+    },
+    {
+      "word": "turkey",
+      "syllables": 2,
+      "position": "medial",
+      "phonemes": [
+        "k"
+      ],
+      "source": "k-medial",
+      "slug": "turkey",
+      "image": "sprites/animals/ani_turkey.png",
+      "categories": [
+        "animals",
+        "food"
+      ]
+    },
+    {
+      "word": "bacon",
+      "syllables": 2,
+      "position": "medial",
+      "phonemes": [
+        "k"
+      ],
+      "source": "k-medial",
+      "slug": "bacon",
+      "image": "sprites/food/food_bacon.png",
+      "categories": [
+        "food"
+      ]
+    },
+    {
+      "word": "necklace",
+      "syllables": 2,
+      "position": "medial",
+      "phonemes": [
+        "k"
+      ],
+      "source": "k-medial",
+      "slug": "necklace",
+      "image": "sprites/clothing/clo_necklace.png",
+      "categories": [
+        "clothing",
+        "objects"
+      ]
+    },
+    {
+      "word": "duck",
+      "syllables": 1,
+      "position": "final",
+      "phonemes": [
+        "k"
+      ],
+      "source": "k-final",
+      "slug": "duck",
+      "image": "sprites/animals/ani_duck.png",
+      "categories": [
+        "animals"
+      ]
+    },
+    {
+      "word": "rock",
+      "syllables": 1,
+      "position": "final",
+      "phonemes": [
+        "k"
+      ],
+      "source": "k-final",
+      "slug": "rock",
+      "image": "sprites/nature/nat_rock.png",
+      "categories": [
+        "nature",
+        "objects"
+      ]
+    },
+    {
+      "word": "book",
+      "syllables": 1,
+      "position": "final",
+      "phonemes": [
+        "k"
+      ],
+      "source": "k-final",
+      "slug": "book",
+      "image": "sprites/objects/obj_book.png",
+      "categories": [
+        "objects",
+        "school"
+      ]
+    },
+    {
+      "word": "sock",
+      "syllables": 1,
+      "position": "final",
+      "phonemes": [
+        "k"
+      ],
+      "source": "k-final",
+      "slug": "sock",
+      "image": "sprites/clothing/clo_sock.png",
+      "categories": [
+        "clothing"
+      ]
+    },
+    {
+      "word": "milk",
+      "syllables": 1,
+      "position": "final",
+      "phonemes": [
+        "k"
+      ],
+      "source": "k-final",
+      "slug": "milk",
+      "image": "sprites/food/food_milk.png",
+      "categories": [
+        "food",
+        "beverage"
+      ]
+    },
+    {
+      "word": "truck",
+      "syllables": 1,
+      "position": "final",
+      "phonemes": [
+        "k"
+      ],
+      "source": "k-final",
+      "slug": "truck",
+      "image": "sprites/transport/tr_truck.png",
+      "categories": [
+        "transportation"
+      ]
+    },
+    {
+      "word": "snake",
+      "syllables": 1,
+      "position": "final",
+      "phonemes": [
+        "k"
+      ],
+      "source": "k-final",
+      "slug": "snake",
+      "image": "sprites/animals/ani_snake.png",
+      "categories": [
+        "animals"
+      ]
+    },
+    {
+      "word": "snack",
+      "syllables": 1,
+      "position": "final",
+      "phonemes": [
+        "k"
+      ],
+      "source": "k-final",
+      "slug": "snack",
+      "image": "sprites/food/food_snack.png",
+      "categories": [
+        "food"
+      ]
+    },
+    {
+      "word": "moon",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "m"
+      ],
+      "source": "m-initial",
+      "slug": "moon",
+      "image": "sprites/nature/nat_moon.png",
+      "categories": [
+        "nature",
+        "space"
+      ]
+    },
+    {
+      "word": "mouse",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "m"
+      ],
+      "source": "m-initial",
+      "slug": "mouse",
+      "image": "sprites/animals/ani_mouse.png",
+      "categories": [
+        "animals"
+      ]
+    },
+    {
+      "word": "mirror",
+      "syllables": 2,
+      "position": "initial",
+      "phonemes": [
+        "m"
+      ],
+      "source": "m-initial",
+      "slug": "mirror",
+      "image": "sprites/household/house_mirror.png",
+      "categories": [
+        "household items"
+      ]
+    },
+    {
+      "word": "mittens",
+      "syllables": 2,
+      "position": "initial",
+      "phonemes": [
+        "m"
+      ],
+      "source": "m-initial",
+      "slug": "mittens",
+      "image": "sprites/clothing/clo_mittens.png",
+      "categories": [
+        "clothing"
+      ]
+    },
+    {
+      "word": "motorcycle",
+      "syllables": 4,
+      "position": "initial",
+      "phonemes": [
+        "m"
+      ],
+      "source": "m-initial",
+      "slug": "motorcycle",
+      "image": "sprites/transport/tr_motorcycle.png",
+      "categories": [
+        "transportation"
+      ]
+    },
+    {
+      "word": "mermaid",
+      "syllables": 2,
+      "position": "initial",
+      "phonemes": [
+        "m"
+      ],
+      "source": "m-initial",
+      "slug": "mermaid",
+      "image": "sprites/people/peo_mermaid.png",
+      "categories": [
+        "people",
+        "fantasy"
+      ]
+    },
+    {
+      "word": "muffin",
+      "syllables": 2,
+      "position": "initial",
+      "phonemes": [
+        "m"
+      ],
+      "source": "m-initial",
+      "slug": "muffin",
+      "image": "sprites/food/food_muffin.png",
+      "categories": [
+        "food"
+      ]
+    },
+    {
+      "word": "marshmallow",
+      "syllables": 3,
+      "position": "initial",
+      "phonemes": [
+        "m"
+      ],
+      "source": "m-initial",
+      "slug": "marshmallow",
+      "image": "sprites/food/food_marshmallow.png",
+      "categories": [
+        "food"
+      ]
+    },
+    {
+      "word": "mountain",
+      "syllables": 2,
+      "position": "initial",
+      "phonemes": [
+        "m"
+      ],
+      "source": "m-initial",
+      "slug": "mountain",
+      "image": "sprites/nature/nat_mountain.png",
+      "categories": [
+        "nature",
+        "places"
+      ]
+    },
+    {
+      "word": "ring",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "r"
+      ],
+      "source": "r-initial",
+      "slug": "ring",
+      "image": "sprites/objects/obj_ring.png",
+      "categories": [
+        "objects",
+        "jewellery"
+      ]
+    },
+    {
+      "word": "radio",
+      "syllables": 3,
+      "position": "initial",
+      "phonemes": [
+        "r"
+      ],
+      "source": "r-initial",
+      "slug": "radio",
+      "image": "sprites/tech/tech_radio.png",
+      "categories": [
+        "technology"
+      ]
+    },
+    {
+      "word": "rabbit",
+      "syllables": 2,
+      "position": "initial",
+      "phonemes": [
+        "r"
+      ],
+      "source": "r-initial",
+      "slug": "rabbit",
+      "image": "sprites/animals/ani_rabbit.png",
+      "categories": [
+        "animals"
+      ]
+    },
+    {
+      "word": "robot",
+      "syllables": 2,
+      "position": "initial",
+      "phonemes": [
+        "r"
+      ],
+      "source": "r-initial",
+      "slug": "robot",
+      "image": "sprites/tech/tech_robot.png",
+      "categories": [
+        "technology"
+      ]
+    },
+    {
+      "word": "rope",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "r"
+      ],
+      "source": "r-initial",
+      "slug": "rope",
+      "image": "sprites/tools/tool_rope.png",
+      "categories": [
+        "tools",
+        "objects"
+      ]
+    },
+    {
+      "word": "carrot",
+      "syllables": 2,
+      "position": "medial",
+      "phonemes": [
+        "r"
+      ],
+      "source": "r-medial",
+      "slug": "carrot",
+      "image": "sprites/food/food_carrot.png",
+      "categories": [
+        "food"
+      ]
+    },
+    {
+      "word": "barrel",
+      "syllables": 2,
+      "position": "medial",
+      "phonemes": [
+        "r"
+      ],
+      "source": "r-medial",
+      "slug": "barrel",
+      "image": "sprites/objects/obj_barrel.png",
+      "categories": [
+        "objects"
+      ]
+    },
+    {
+      "word": "squirrel",
+      "syllables": 2,
+      "position": "medial",
+      "phonemes": [
+        "r"
+      ],
+      "source": "r-medial",
+      "slug": "squirrel",
+      "image": "sprites/animals/ani_squirrel.png",
+      "categories": [
+        "animals"
+      ]
+    },
+    {
+      "word": "parrot",
+      "syllables": 2,
+      "position": "medial",
+      "phonemes": [
+        "r"
+      ],
+      "source": "r-medial",
+      "slug": "parrot",
+      "image": "sprites/animals/ani_parrot.png",
+      "categories": [
+        "animals"
+      ]
+    },
+    {
+      "word": "camera",
+      "syllables": 3,
+      "position": "medial",
+      "phonemes": [
+        "r"
+      ],
+      "source": "r-medial",
+      "slug": "camera",
+      "image": "sprites/tech/tech_camera.png",
+      "categories": [
+        "technology"
+      ]
+    },
+    {
+      "word": "turtle",
+      "syllables": 2,
+      "position": "initial",
+      "phonemes": [
+        "t"
+      ],
+      "source": "t-initial",
+      "slug": "turtle",
+      "image": "sprites/animals/ani_turtle.png",
+      "categories": [
+        "animals"
+      ]
+    },
+    {
+      "word": "tiger",
+      "syllables": 2,
+      "position": "initial",
+      "phonemes": [
+        "t"
+      ],
+      "source": "t-initial",
+      "slug": "tiger",
+      "image": "sprites/animals/ani_tiger.png",
+      "categories": [
+        "animals"
+      ]
+    },
+    {
+      "word": "tomato",
+      "syllables": 3,
+      "position": "initial",
+      "phonemes": [
+        "t"
+      ],
+      "source": "t-initial",
+      "slug": "tomato",
+      "image": "sprites/food/food_tomato.png",
+      "categories": [
+        "food"
+      ]
+    },
+    {
+      "word": "table",
+      "syllables": 2,
+      "position": "initial",
+      "phonemes": [
+        "t"
+      ],
+      "source": "t-initial",
+      "slug": "table",
+      "image": "sprites/household/house_table.png",
+      "categories": [
+        "furniture",
+        "household items"
+      ]
+    },
+    {
+      "word": "tent",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "t"
+      ],
+      "source": "t-initial",
+      "slug": "tent",
+      "image": "sprites/places/place_tent.png",
+      "categories": [
+        "places",
+        "outdoors"
+      ]
+    },
+    {
+      "word": "bat",
+      "syllables": 1,
+      "position": "final",
+      "phonemes": [
+        "t"
+      ],
+      "source": "t-final",
+      "slug": "bat",
+      "image": "sprites/objects/obj_bat.png",
+      "categories": [
+        "objects",
+        "sports"
+      ]
+    },
+    {
+      "word": "hat",
+      "syllables": 1,
+      "position": "final",
+      "phonemes": [
+        "t"
+      ],
+      "source": "t-final",
+      "slug": "hat",
+      "image": "sprites/clothing/clo_hat.png",
+      "categories": [
+        "clothing"
+      ]
+    },
+    {
+      "word": "cat",
+      "syllables": 1,
+      "position": "final",
+      "phonemes": [
+        "t"
+      ],
+      "source": "t-final",
+      "slug": "cat",
+      "image": "sprites/animals/ani_cat.png",
+      "categories": [
+        "animals"
+      ]
+    },
+    {
+      "word": "light",
+      "syllables": 1,
+      "position": "final",
+      "phonemes": [
+        "t"
+      ],
+      "source": "t-final",
+      "slug": "light",
+      "image": "sprites/tech/tech_light.png",
+      "categories": [
+        "technology",
+        "household items"
+      ]
+    },
+    {
+      "word": "carrot",
+      "syllables": 2,
+      "position": "final",
+      "phonemes": [
+        "t"
+      ],
+      "source": "t-final",
+      "slug": "carrot",
+      "image": "sprites/food/food_carrot.png",
+      "categories": [
+        "food"
+      ]
+    },
+    {
+      "word": "potato",
+      "syllables": 3,
+      "position": "medial",
+      "phonemes": [
+        "t"
+      ],
+      "source": "t-medial",
+      "slug": "potato",
+      "image": "sprites/food/food_potato.png",
+      "categories": [
+        "food"
+      ]
+    },
+    {
+      "word": "seatbelt",
+      "syllables": 2,
+      "position": "medial",
+      "phonemes": [
+        "t"
+      ],
+      "source": "t-medial",
+      "slug": "seatbelt",
+      "image": "sprites/objects/obj_seatbelt.png",
+      "categories": [
+        "objects",
+        "transportation"
+      ]
+    },
+    {
+      "word": "doctor",
+      "syllables": 2,
+      "position": "medial",
+      "phonemes": [
+        "t"
+      ],
+      "source": "t-medial",
+      "slug": "doctor",
+      "image": "sprites/people/peo_doctor.png",
+      "categories": [
+        "people"
+      ]
+    },
+    {
+      "word": "mustard",
+      "syllables": 2,
+      "position": "medial",
+      "phonemes": [
+        "t"
+      ],
+      "source": "t-medial",
+      "slug": "mustard",
+      "image": "sprites/food/food_mustard.png",
+      "categories": [
+        "food"
+      ]
+    },
+    {
+      "word": "hunter",
+      "syllables": 2,
+      "position": "medial",
+      "phonemes": [
+        "t"
+      ],
+      "source": "t-medial",
+      "slug": "hunter",
+      "image": "sprites/people/peo_hunter.png",
+      "categories": [
+        "people"
+      ]
+    },
+    {
+      "word": "theatre",
+      "syllables": 3,
+      "position": "initial",
+      "phonemes": [
+        "th"
+      ],
+      "source": "th-initial",
+      "slug": "theatre",
+      "image": "sprites/places/place_theatre.png",
+      "categories": [
+        "places",
+        "buildings"
+      ]
+    },
+    {
+      "word": "thursday",
+      "syllables": 2,
+      "position": "initial",
+      "phonemes": [
+        "th"
+      ],
+      "source": "th-initial",
+      "slug": "thursday",
+      "image": "sprites/objects/obj_thursday.png",
+      "categories": [
+        "time",
+        "calendar"
+      ]
+    },
+    {
+      "word": "thumb",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "th"
+      ],
+      "source": "th-initial",
+      "slug": "thumb",
+      "image": "sprites/body/body_thumb.png",
+      "categories": [
+        "body parts"
+      ]
+    },
+    {
+      "word": "thermometer",
+      "syllables": 4,
+      "position": "initial",
+      "phonemes": [
+        "th"
+      ],
+      "source": "th-initial",
+      "slug": "thermometer",
+      "image": "sprites/tools/tool_thermometer.png",
+      "categories": [
+        "tools",
+        "health"
+      ]
+    },
+    {
+      "word": "vanilla",
+      "syllables": 3,
+      "position": "initial",
+      "phonemes": [
+        "v"
+      ],
+      "source": "v-initial",
+      "slug": "vanilla",
+      "image": "sprites/food/food_vanilla.png",
+      "categories": [
+        "food"
+      ]
+    },
+    {
+      "word": "van",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "v"
+      ],
+      "source": "v-initial",
+      "slug": "van",
+      "image": "sprites/transport/tr_van.png",
+      "categories": [
+        "transportation"
+      ]
+    },
+    {
+      "word": "vest",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "v"
+      ],
+      "source": "v-initial",
+      "slug": "vest",
+      "image": "sprites/clothing/clo_vest.png",
+      "categories": [
+        "clothing"
+      ]
+    },
+    {
+      "word": "vegetables",
+      "syllables": 3,
+      "position": "initial",
+      "phonemes": [
+        "v"
+      ],
+      "source": "v-initial",
+      "slug": "vegetables",
+      "image": "sprites/food/food_vegetables.png",
+      "categories": [
+        "food"
+      ]
+    },
+    {
+      "word": "video",
+      "syllables": 3,
+      "position": "initial",
+      "phonemes": [
+        "v"
+      ],
+      "source": "v-initial",
+      "slug": "video",
+      "image": "sprites/tech/tech_video.png",
+      "categories": [
+        "technology"
+      ]
+    },
+    {
+      "word": "vacuum",
+      "syllables": 2,
+      "position": "initial",
+      "phonemes": [
+        "v"
+      ],
+      "source": "v-initial",
+      "slug": "vacuum",
+      "image": "sprites/household/house_vacuum.png",
+      "categories": [
+        "household items",
+        "technology"
+      ]
+    },
+    {
+      "word": "visit",
+      "syllables": 2,
+      "position": "initial",
+      "phonemes": [
+        "v"
+      ],
+      "source": "v-initial",
+      "slug": "visit",
+      "image": "sprites/objects/obj_visit.png",
+      "categories": [
+        "actions",
+        "time"
+      ]
+    },
+    {
+      "word": "vase",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "v"
+      ],
+      "source": "v-initial",
+      "slug": "vase",
+      "image": "sprites/household/house_vase.png",
+      "categories": [
+        "household items"
+      ]
+    },
+    {
+      "word": "vulture",
+      "syllables": 2,
+      "position": "initial",
+      "phonemes": [
+        "v"
+      ],
+      "source": "v-initial",
+      "slug": "vulture",
+      "image": "sprites/animals/ani_vulture.png",
+      "categories": [
+        "animals"
+      ]
+    },
+    {
+      "word": "violin",
+      "syllables": 3,
+      "position": "initial",
+      "phonemes": [
+        "v"
+      ],
+      "source": "v-initial",
+      "slug": "violin",
+      "image": "sprites/objects/obj_violin.png",
+      "categories": [
+        "music",
+        "objects"
+      ]
+    },
+    {
+      "word": "visor",
+      "syllables": 2,
+      "position": "initial",
+      "phonemes": [
+        "v"
+      ],
+      "source": "v-initial",
+      "slug": "visor",
+      "image": "sprites/clothing/clo_visor.png",
+      "categories": [
+        "clothing",
+        "sports"
+      ]
+    },
+    {
+      "word": "favourite",
+      "syllables": 3,
+      "position": "medial",
+      "phonemes": [
+        "v"
+      ],
+      "source": "v-medial",
+      "slug": "favorite",
+      "image": "sprites/objects/obj_favorite.png",
+      "categories": [
+        "descriptors"
+      ]
+    },
+    {
+      "word": "avocado",
+      "syllables": 4,
+      "position": "medial",
+      "phonemes": [
+        "v"
+      ],
+      "source": "v-medial",
+      "slug": "avocado",
+      "image": "sprites/food/food_avocado.png",
+      "categories": [
+        "food"
+      ]
+    },
+    {
+      "word": "beaver",
+      "syllables": 2,
+      "position": "medial",
+      "phonemes": [
+        "v"
+      ],
+      "source": "v-medial",
+      "slug": "beaver",
+      "image": "sprites/animals/ani_beaver.png",
+      "categories": [
+        "animals"
+      ]
+    },
+    {
+      "word": "overcoat",
+      "syllables": 3,
+      "position": "medial",
+      "phonemes": [
+        "v"
+      ],
+      "source": "v-medial",
+      "slug": "overcoat",
+      "image": "sprites/clothing/clo_overcoat.png",
+      "categories": [
+        "clothing"
+      ]
+    },
+    {
+      "word": "clover",
+      "syllables": 2,
+      "position": "medial",
+      "phonemes": [
+        "v"
+      ],
+      "source": "v-medial",
+      "slug": "clover",
+      "image": "sprites/nature/nat_clover.png",
+      "categories": [
+        "plants",
+        "nature"
+      ]
+    },
+    {
+      "word": "graveyard",
+      "syllables": 2,
+      "position": "medial",
+      "phonemes": [
+        "v"
+      ],
+      "source": "v-medial",
+      "slug": "graveyard",
+      "image": "sprites/places/place_graveyard.png",
+      "categories": [
+        "places"
+      ]
+    },
+    {
+      "word": "glove",
+      "syllables": 1,
+      "position": "final",
+      "phonemes": [
+        "v"
+      ],
+      "source": "v-final",
+      "slug": "glove",
+      "image": "sprites/clothing/clo_glove.png",
+      "categories": [
+        "clothing"
+      ]
+    },
+    {
+      "word": "stove",
+      "syllables": 1,
+      "position": "final",
+      "phonemes": [
+        "v"
+      ],
+      "source": "v-final",
+      "slug": "stove",
+      "image": "sprites/household/house_stove.png",
+      "categories": [
+        "household items"
+      ]
+    },
+    {
+      "word": "hive",
+      "syllables": 1,
+      "position": "final",
+      "phonemes": [
+        "v"
+      ],
+      "source": "v-final",
+      "slug": "hive",
+      "image": "sprites/animals/ani_hive.png",
+      "categories": [
+        "animals",
+        "nature"
+      ]
+    },
+    {
+      "word": "five",
+      "syllables": 1,
+      "position": "final",
+      "phonemes": [
+        "v"
+      ],
+      "source": "v-final",
+      "slug": "five",
+      "image": "sprites/objects/obj_five.png",
+      "categories": [
+        "numbers",
+        "math"
+      ]
+    },
+    {
+      "word": "sleeve",
+      "syllables": 1,
+      "position": "final",
+      "phonemes": [
+        "v"
+      ],
+      "source": "v-final",
+      "slug": "sleeve",
+      "image": "sprites/clothing/clo_sleeve.png",
+      "categories": [
+        "clothing"
+      ]
+    },
+    {
+      "word": "drive",
+      "syllables": 1,
+      "position": "final",
+      "phonemes": [
+        "v"
+      ],
+      "source": "v-final",
+      "slug": "drive",
+      "image": "sprites/objects/obj_drive.png",
+      "categories": [
+        "actions",
+        "transportation"
+      ]
+    },
+    {
+      "word": "wave",
+      "syllables": 1,
+      "position": "final",
+      "phonemes": [
+        "v"
+      ],
+      "source": "v-final",
+      "slug": "wave",
+      "image": "sprites/nature/nat_wave.png",
+      "categories": [
+        "nature",
+        "actions"
+      ]
+    },
+    {
+      "word": "olive",
+      "syllables": 2,
+      "position": "final",
+      "phonemes": [
+        "v"
+      ],
+      "source": "v-final",
+      "slug": "olive",
+      "image": "sprites/food/food_olive.png",
+      "categories": [
+        "food"
+      ]
+    },
+    {
+      "word": "cave",
+      "syllables": 1,
+      "position": "final",
+      "phonemes": [
+        "v"
+      ],
+      "source": "v-final",
+      "slug": "cave",
+      "image": "sprites/nature/nat_cave.png",
+      "categories": [
+        "nature",
+        "places"
+      ]
+    },
+    {
+      "word": "move",
+      "syllables": 1,
+      "position": "final",
+      "phonemes": [
+        "v"
+      ],
+      "source": "v-final",
+      "slug": "move",
+      "image": "sprites/objects/obj_move.png",
+      "categories": [
+        "actions"
+      ]
+    },
+    {
+      "word": "microwave",
+      "syllables": 3,
+      "position": "final",
+      "phonemes": [
+        "v"
+      ],
+      "source": "v-final",
+      "slug": "microwave",
+      "image": "sprites/household/house_microwave.png",
+      "categories": [
+        "household items",
+        "technology"
+      ]
+    },
+    { "word": "shoes", "syllables": 1, "position": "initial", "phonemes": ["sh"], "source": "sh-initial", "slug": "shoes", "image": "sprites/clothing/clo_shoes.png", "categories": ["clothing"] },
+    { "word": "sheep", "syllables": 1, "position": "initial", "phonemes": ["sh"], "source": "sh-initial", "slug": "sheep", "image": "sprites/animals/ani_sheep.png", "categories": ["animals"] },
+    { "word": "ship", "syllables": 1, "position": "initial", "phonemes": ["sh"], "source": "sh-initial", "slug": "ship", "image": "sprites/transport/tr_ship.png", "categories": ["transportation"] },
+    { "word": "shelves", "syllables": 1, "position": "initial", "phonemes": ["sh"], "source": "sh-initial", "slug": "shelves", "image": "sprites/household/house_shelves.png", "categories": ["furniture", "household items"] },
+    { "word": "shade", "syllables": 1, "position": "initial", "phonemes": ["sh"], "source": "sh-initial", "slug": "shade", "image": "sprites/nature/nat_shade.png", "categories": ["nature"] },
+    { "word": "shovel", "syllables": 2, "position": "initial", "phonemes": ["sh"], "source": "sh-initial", "slug": "shovel", "image": "sprites/tools/tool_shovel.png", "categories": ["tools"] },
+    { "word": "shot", "syllables": 1, "position": "initial", "phonemes": ["sh"], "source": "sh-initial", "slug": "shot", "image": "sprites/objects/obj_shot.png", "categories": ["objects"] },
+    { "word": "shorts", "syllables": 1, "position": "initial", "phonemes": ["sh"], "source": "sh-initial", "slug": "shorts", "image": "sprites/clothing/clo_shorts.png", "categories": ["clothing"] },
+    { "word": "shirt", "syllables": 1, "position": "initial", "phonemes": ["sh"], "source": "sh-initial", "slug": "shirt", "image": "sprites/clothing/clo_shirt.png", "categories": ["clothing"] },
+    { "word": "chef", "syllables": 1, "position": "initial", "phonemes": ["sh"], "source": "sh-initial", "slug": "chef", "image": "sprites/people/peo_chef.png", "categories": ["people"] },
+    { "word": "shapes", "syllables": 1, "position": "initial", "phonemes": ["sh"], "source": "sh-initial", "slug": "shapes", "image": "sprites/shapes/shape_shapes.png", "categories": ["shapes"] },
+    { "word": "sheets", "syllables": 1, "position": "initial", "phonemes": ["sh"], "source": "sh-initial", "slug": "sheets", "image": "sprites/household/house_sheets.png", "categories": ["household items"] },
+    { "word": "shampoo", "syllables": 2, "position": "initial", "phonemes": ["sh"], "source": "sh-initial", "slug": "shampoo", "image": "sprites/household/house_shampoo.png", "categories": ["household items", "health"] },
+    { "word": "shoulders", "syllables": 2, "position": "initial", "phonemes": ["sh"], "source": "sh-initial", "slug": "shoulders", "image": "sprites/body/body_shoulders.png", "categories": ["body parts"] },
+    { "word": "shower", "syllables": 2, "position": "initial", "phonemes": ["sh"], "source": "sh-initial", "slug": "shower", "image": "sprites/household/house_shower.png", "categories": ["household items", "bathroom"] },
+    { "word": "sharpener", "syllables": 3, "position": "initial", "phonemes": ["sh"], "source": "sh-initial", "slug": "sharpener", "image": "sprites/tools/tool_sharpener.png", "categories": ["tools", "school"] },
 
-    { "word": "pencil",    "position": "medial",  "syllables": 2, "phonemes": ["s"], "slug": "pencil",     "categories": ["school"],          "image": "sprites/objects/obj_pencil.png" },
-    { "word": "castle",    "position": "medial",  "syllables": 2, "phonemes": ["s"], "slug": "castle",     "categories": ["place"],           "image": "sprites/objects/obj_castle.png" },
-    { "word": "whistle",   "position": "medial",  "syllables": 2, "phonemes": ["s"], "slug": "whistle",    "categories": ["tool"],            "image": "sprites/objects/obj_whistle.png" },
-
-    { "word": "bus",       "position": "final",   "syllables": 1, "phonemes": ["s"], "slug": "bus",        "categories": ["vehicle"],         "image": "sprites/objects/obj_bus.png" },
-    { "word": "mouse",     "position": "final",   "syllables": 1, "phonemes": ["s"], "slug": "mouse",      "categories": ["animal"],          "image": "sprites/objects/obj_mouse.png" },
-    { "word": "house",     "position": "final",   "syllables": 1, "phonemes": ["s"], "slug": "house",      "categories": ["place"],           "image": "sprites/objects/obj_house.png" },
-
-    { "word": "cup",       "position": "final",   "syllables": 1, "phonemes": ["p"], "slug": "cup",        "categories": ["drinkware"],       "image": "sprites/objects/obj_cup.png" },
-    { "word": "mug",       "position": "final",   "syllables": 1, "phonemes": ["g"], "slug": "mug",        "categories": ["drinkware"],       "image": "sprites/objects/obj_mug.png" },
-    { "word": "bowl",      "position": "final",   "syllables": 1, "phonemes": ["l"], "slug": "bowl",       "categories": ["container"],       "image": "sprites/objects/obj_bowl.png" },
-    { "word": "spoon",     "position": "initial", "syllables": 1, "phonemes": ["s"], "slug": "spoon",      "categories": ["utensil"],         "image": "sprites/objects/obj_spoon.png" },
-    { "word": "bread",     "position": "initial", "syllables": 1, "phonemes": ["b"], "slug": "bread",      "categories": ["food"],            "image": "sprites/objects/obj_bread.png" },
-    { "word": "cake",      "position": "initial", "syllables": 1, "phonemes": ["k"], "slug": "cake",       "categories": ["food"],            "image": "sprites/objects/obj_cake.png" },
-    { "word": "chair",     "position": "initial", "syllables": 1, "phonemes": ["tʃ"],"slug": "chair",      "categories": ["furniture"],       "image": "sprites/objects/obj_chair.png" },
-    { "word": "bench",     "position": "final",   "syllables": 1, "phonemes": ["tʃ"],"slug": "bench",      "categories": ["furniture"],       "image": "sprites/objects/obj_bench.png" },
-    { "word": "skateboard","position": "initial", "syllables": 2, "phonemes": ["sk"],"slug": "skateboard", "categories": ["sports"],          "image": "sprites/objects/obj_skateboard.png" },
-    { "word": "microphone","position": "medial",  "syllables": 4, "phonemes": ["k"], "slug": "microphone", "categories": ["tool"],            "image": "sprites/objects/obj_microphone.png" },
-    { "word": "glasses",   "position": "medial",  "syllables": 2, "phonemes": ["z"], "slug": "glasses",    "categories": ["accessory"],       "image": "sprites/objects/obj_glasses.png" },
-    { "word": "mirror",    "position": "medial",  "syllables": 2, "phonemes": ["r"], "slug": "mirror",     "categories": ["household"],       "image": "sprites/objects/obj_mirror.png" }
+    { "word": "mushrooms", "syllables": 2, "position": "medial", "phonemes": ["sh"], "source": "sh-medial", "slug": "mushrooms", "image": "sprites/food/food_mushrooms.png", "categories": ["food"] },
+    { "word": "fishbowl", "syllables": 2, "position": "medial", "phonemes": ["sh"], "source": "sh-medial", "slug": "fishbowl", "image": "sprites/objects/obj_fishbowl.png", "categories": ["objects", "pets"] },
+    { "word": "horseshoes", "syllables": 2, "position": "medial", "phonemes": ["sh"], "source": "sh-medial", "slug": "horseshoes", "image": "sprites/objects/obj_horseshoes.png", "categories": ["objects", "sports"] },
+    { "word": "spaceship", "syllables": 2, "position": "medial", "phonemes": ["sh"], "source": "sh-medial", "slug": "spaceship", "image": "sprites/transport/tr_spaceship.png", "categories": ["transportation", "space"] },
+    { "word": "lampshade", "syllables": 2, "position": "medial", "phonemes": ["sh"], "source": "sh-medial", "slug": "lampshade", "image": "sprites/household/house_lampshade.png", "categories": ["household items"] },
+    { "word": "flashcards", "syllables": 2, "position": "medial", "phonemes": ["sh"], "source": "sh-medial", "slug": "flashcards", "image": "sprites/objects/obj_flashcards.png", "categories": ["school", "objects"] },
+    { "word": "cashews", "syllables": 2, "position": "medial", "phonemes": ["sh"], "source": "sh-medial", "slug": "cashews", "image": "sprites/food/food_cashews.png", "categories": ["food"] },
+    { "word": "hash browns", "syllables": 2, "position": "medial", "phonemes": ["sh"], "source": "sh-medial", "slug": "hash-browns", "image": "sprites/food/food_hash-browns.png", "categories": ["food"] },
+    { "word": "pushups", "syllables": 2, "position": "medial", "phonemes": ["sh"], "source": "sh-medial", "slug": "pushups", "image": "sprites/objects/obj_pushups.png", "categories": ["sports"] },
+    { "word": "trash can", "syllables": 2, "position": "medial", "phonemes": ["sh"], "source": "sh-medial", "slug": "trash-can", "image": "sprites/household/house_trash-can.png", "categories": ["household items"] },
+    { "word": "seashells", "syllables": 2, "position": "medial", "phonemes": ["sh"], "source": "sh-medial", "slug": "seashells", "image": "sprites/nature/nat_seashells.png", "categories": ["nature"] },
+    { "word": "flashlight", "syllables": 2, "position": "medial", "phonemes": ["sh"], "source": "sh-medial", "slug": "flashlight", "image": "sprites/household/house_flashlight.png", "categories": ["household items", "tools"] },
+    { "word": "cashier", "syllables": 2, "position": "medial", "phonemes": ["sh"], "source": "sh-medial", "slug": "cashier", "image": "sprites/people/peo_cashier.png", "categories": ["people", "jobs"] },
+    { "word": "marshmallows", "syllables": 3, "position": "medial", "phonemes": ["sh"], "source": "sh-medial", "slug": "marshmallows", "image": "sprites/food/food_marshmallows.png", "categories": ["food"] },
+    { "word": "radishes", "syllables": 3, "position": "medial", "phonemes": ["sh"], "source": "sh-medial", "slug": "radishes", "image": "sprites/food/food_radishes.png", "categories": ["food"] },
+    { "word": "pushpop", "syllables": 2, "position": "medial", "phonemes": ["sh"], "source": "sh-medial", "slug": "pushpop", "image": "sprites/food/food_pushpop.png", "categories": ["food"] },
+    { "word": "puppet show", "syllables": 3, "position": "medial", "phonemes": ["sh"], "source": "sh-medial", "slug": "puppet-show", "image": "sprites/places/place_puppet-show.png", "categories": ["places", "entertainment"] },
+    { "word": "eye shadow", "syllables": 3, "position": "medial", "phonemes": ["sh"], "source": "sh-medial", "slug": "eye-shadow", "image": "sprites/household/house_eye-shadow.png", "categories": ["household items", "health"] },
+    { "word": "washer", "syllables": 2, "position": "medial", "phonemes": ["sh"], "source": "sh-medial", "slug": "washer", "image": "sprites/household/house_washer.png", "categories": ["household items"] },
+    { "word": "dishtowel", "syllables": 2, "position": "medial", "phonemes": ["sh"], "source": "sh-medial", "slug": "dishtowel", "image": "sprites/household/house_dishtowel.png", "categories": ["household items"] }
   ],
   "verbs": [
-    { "word": "sip",   "position": "initial", "syllables": 1, "phonemes": ["s"], "slug": "sip",
-      "requires": { "anyOfCategories": ["drinkware","beverage"] },
-      "suggests": ["cup","mug","juice"],
-      "image": "sprites/verbs/verb_sip.png"
+    {
+      "word": "chat",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "ch"
+      ],
+      "source": "ch-initial",
+      "slug": "chat",
+      "image": "sprites/actions/act_chat.png",
+      "categories": [
+        "communication",
+        "actions"
+      ]
     },
-    { "word": "sit",   "position": "initial", "syllables": 1, "phonemes": ["s"], "slug": "sit",
-      "requires": { "anyOfCategories": ["furniture"] },
-      "suggests": ["chair","bench"],
-      "image": "sprites/verbs/verb_sit.png"
+    {
+      "word": "check",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "ch"
+      ],
+      "source": "ch-initial",
+      "slug": "check",
+      "image": "sprites/actions/act_check.png",
+      "categories": [
+        "actions"
+      ]
     },
-    { "word": "slice", "position": "initial", "syllables": 1, "phonemes": ["s"], "slug": "slice",
-      "requires": { "anyOfCategories": ["food"] },
-      "suggests": ["sandwich","bread","cake"],
-      "image": "sprites/verbs/verb_slice.png"
+    {
+      "word": "change",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "ch"
+      ],
+      "source": "ch-initial",
+      "slug": "change",
+      "image": "sprites/actions/act_change.png",
+      "categories": [
+        "actions"
+      ]
     },
-    { "word": "stir",  "position": "initial", "syllables": 1, "phonemes": ["s"], "slug": "stir",
-      "requires": { "anyOfCategories": ["food","container","utensil"] },
-      "suggests": ["soup","bowl","spoon"],
-      "image": "sprites/verbs/verb_stir.png"
+    {
+      "word": "save",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "s"
+      ],
+      "source": "s-initial",
+      "slug": "save",
+      "image": "sprites/actions/act_save.png",
+      "categories": [
+        "actions"
+      ]
     },
-    { "word": "sing",  "position": "initial", "syllables": 1, "phonemes": ["s"], "slug": "sing",
-      "requires": { "anyOfCategories": ["tool"] },
-      "suggests": ["microphone"],
-      "image": "sprites/verbs/verb_sing.png"
+    {
+      "word": "see",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "s"
+      ],
+      "source": "s-initial",
+      "slug": "see",
+      "image": "sprites/actions/act_see.png",
+      "categories": [
+        "actions",
+        "perception"
+      ]
     },
-    { "word": "skate", "position": "initial", "syllables": 1, "phonemes": ["s"], "slug": "skate",
-      "requires": { "anyOfCategories": ["sports"] },
-      "suggests": ["skateboard"],
-      "image": "sprites/verbs/verb_skate.png"
+    {
+      "word": "send",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "s"
+      ],
+      "source": "s-initial",
+      "slug": "send",
+      "image": "sprites/actions/act_send.png",
+      "categories": [
+        "actions",
+        "communication"
+      ]
     },
-    { "word": "skip",  "position": "initial", "syllables": 1, "phonemes": ["s"], "slug": "skip",
-      "requires": { "anyOfCategories": ["*"] },
-      "suggests": [],
-      "image": "sprites/verbs/verb_skip.png"
+    {
+      "word": "sew",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "s"
+      ],
+      "source": "s-initial",
+      "slug": "sew",
+      "image": "sprites/actions/act_sew.png",
+      "categories": [
+        "actions",
+        "crafts"
+      ]
     },
-    { "word": "see",   "position": "initial", "syllables": 1, "phonemes": ["s"], "slug": "see",
-      "requires": { "anyOfCategories": ["accessory","*"] },
-      "suggests": ["glasses","binoculars"],
-      "image": "sprites/verbs/verb_see.png"
+    {
+      "word": "signal",
+      "syllables": 2,
+      "position": "initial",
+      "phonemes": [
+        "s"
+      ],
+      "source": "s-initial",
+      "slug": "signal",
+      "image": "sprites/actions/act_signal.png",
+      "categories": [
+        "actions",
+        "communication"
+      ]
     },
-    { "word": "smile", "position": "initial", "syllables": 1, "phonemes": ["s"], "slug": "smile",
-      "requires": { "anyOfCategories": ["household","*"] },
-      "suggests": ["mirror"],
-      "image": "sprites/verbs/verb_smile.png"
+    {
+      "word": "sip",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "s"
+      ],
+      "source": "s-initial",
+      "slug": "sip",
+      "image": "sprites/actions/act_sip.png",
+      "categories": [
+        "actions",
+        "food",
+        "beverage"
+      ]
     },
-
-  { "word": "sailor", "position": "initial", "syllables": 2, "phonemes": ["s"], "slug": "sailor",
-    "requires": { "anyOfCategories": ["person"] },
-    "suggests": ["ship","boat"],
-    "image": "sprites/verbs/verb_sailor.png" },
-  { "word": "serve", "position": "initial", "syllables": 2, "phonemes": ["s"], "slug": "serve",
-    "requires": { "anyOfCategories": ["food","plate"] },
-    "suggests": ["plate","tray"],
-    "image": "sprites/verbs/verb_serve.png" },
-  { "word": "signal", "position": "initial", "syllables": 2, "phonemes": ["s"], "slug": "signal",
-    "requires": { "anyOfCategories": ["hand","light"] },
-    "suggests": ["flag","light"],
-    "image": "sprites/verbs/verb_signal.png" },
-  { "word": "search", "position": "initial", "syllables": 2, "phonemes": ["s"], "slug": "search",
-    "requires": { "anyOfCategories": ["object"] },
-    "suggests": ["magnifying glass"],
-    "image": "sprites/verbs/verb_search.png" },
-  { "word": "scatter", "position": "initial", "syllables": 2, "phonemes": ["s"], "slug": "scatter",
-    "requires": { "anyOfCategories": ["small objects"] },
-    "suggests": ["seeds","toys"],
-    "image": "sprites/verbs/verb_scatter.png" },
-  { "word": "separate", "position": "initial", "syllables": 2, "phonemes": ["s"], "slug": "separate",
-    "requires": { "anyOfCategories": ["pair","set"] },
-    "suggests": ["blocks","clothes"],
-    "image": "sprites/verbs/verb_separate.png" },
-  { "word": "settle", "position": "initial", "syllables": 2, "phonemes": ["s"], "slug": "settle",
-    "requires": { "anyOfCategories": ["chair","seat"] },
-    "suggests": ["chair"],
-    "image": "sprites/verbs/verb_settle.png" },
-  { "word": "send", "position": "initial", "syllables": 2, "phonemes": ["s"], "slug": "send",
-    "requires": { "anyOfCategories": ["letter","mail"] },
-    "suggests": ["envelope"],
-    "image": "sprites/verbs/verb_send.png" },
-  { "word": "shadow", "position": "initial", "syllables": 2, "phonemes": ["s"], "slug": "shadow",
-    "requires": { "anyOfCategories": ["light","ground"] },
-    "suggests": ["person","lamp"],
-    "image": "sprites/verbs/verb_shadow.png" },
-  { "word": "shuffle", "position": "initial", "syllables": 2, "phonemes": ["s"], "slug": "shuffle",
-    "requires": { "anyOfCategories": ["cards","music"] },
-    "suggests": ["cards"],
-    "image": "sprites/verbs/verb_shuffle.png" },
-  { "word": "answer", "position": "medial", "syllables": 2, "phonemes": ["s"], "slug": "answer",
-    "requires": { "anyOfCategories": ["phone","question"] },
-    "suggests": ["phone","question mark"],
-    "image": "sprites/verbs/verb_answer.png" },
-  { "word": "whistle", "position": "medial", "syllables": 2, "phonemes": ["s"], "slug": "whistle",
-    "requires": { "anyOfCategories": ["mouth","air"] },
-    "suggests": ["whistle"],
-    "image": "sprites/verbs/verb_whistle.png" },
-  { "word": "listen", "position": "medial", "syllables": 2, "phonemes": ["s"], "slug": "listen",
-    "requires": { "anyOfCategories": ["ear","sound"] },
-    "suggests": ["earphones","radio"],
-    "image": "sprites/verbs/verb_listen.png" },
-  { "word": "dressing", "position": "medial", "syllables": 2, "phonemes": ["s"], "slug": "dressing",
-    "requires": { "anyOfCategories": ["clothes","person"] },
-    "suggests": ["shirt","mirror"],
-    "image": "sprites/verbs/verb_dressing.png" },
-  { "word": "crossing", "position": "medial", "syllables": 2, "phonemes": ["s"], "slug": "crossing",
-    "requires": { "anyOfCategories": ["road","path"] },
-    "suggests": ["road","traffic light"],
-    "image": "sprites/verbs/verb_crossing.png" },
-  { "word": "blessing", "position": "medial", "syllables": 2, "phonemes": ["s"], "slug": "blessing",
-    "requires": { "anyOfCategories": ["hand","person"] },
-    "suggests": ["priest","hands"],
-    "image": "sprites/verbs/verb_blessing.png" },
-  { "word": "gossip", "position": "medial", "syllables": 2, "phonemes": ["s"], "slug": "gossip",
-    "requires": { "anyOfCategories": ["people","talking"] },
-    "suggests": ["friends","chat"],
-    "image": "sprites/verbs/verb_gossip.png" },
-  { "word": "massage", "position": "medial", "syllables": 2, "phonemes": ["s"], "slug": "massage",
-    "requires": { "anyOfCategories": ["hand","back"] },
-    "suggests": ["massage table"],
-    "image": "sprites/verbs/verb_massage.png" },
-  { "word": "passing", "position": "medial", "syllables": 2, "phonemes": ["s"], "slug": "passing",
-    "requires": { "anyOfCategories": ["ball","object"] },
-    "suggests": ["ball"],
-    "image": "sprites/verbs/verb_passing.png" },
-  { "word": "dressing", "position": "medial", "syllables": 2, "phonemes": ["s"], "slug": "dressing",
-    "requires": { "anyOfCategories": ["clothes","mirror"] },
-    "suggests": ["shirt"],
-    "image": "sprites/verbs/verb_dressing.png" },
-
-  { "word": "erase", "position": "final", "syllables": 2, "phonemes": ["s"], "slug": "erase",
-    "requires": { "anyOfCategories": ["board","eraser"] },
-    "suggests": ["board","rubber"],
-    "image": "sprites/verbs/verb_erase.png" },
-  { "word": "release", "position": "final", "syllables": 2, "phonemes": ["s"], "slug": "release",
-    "requires": { "anyOfCategories": ["object","hand"] },
-    "suggests": ["balloon","bird"],
-    "image": "sprites/verbs/verb_release.png" },
-  { "word": "increase", "position": "final", "syllables": 2, "phonemes": ["s"], "slug": "increase",
-    "requires": { "anyOfCategories": ["chart","arrow"] },
-    "suggests": ["graph","arrow"],
-    "image": "sprites/verbs/verb_increase.png" },
-  { "word": "decrease", "position": "final", "syllables": 2, "phonemes": ["s"], "slug": "decrease",
-    "requires": { "anyOfCategories": ["chart","arrow"] },
-    "suggests": ["graph","arrow"],
-    "image": "sprites/verbs/verb_decrease.png" },
-  { "word": "release", "position": "final", "syllables": 2, "phonemes": ["s"], "slug": "release2",
-    "requires": { "anyOfCategories": ["animal","object"] },
-    "suggests": ["bird","fish"],
-    "image": "sprites/verbs/verb_release2.png" },
-  { "word": "applause", "position": "final", "syllables": 2, "phonemes": ["s"], "slug": "applause",
-    "requires": { "anyOfCategories": ["hands","audience"] },
-    "suggests": ["hands","stage"],
-    "image": "sprites/verbs/verb_applause.png" },
-  { "word": "misuse", "position": "final", "syllables": 2, "phonemes": ["s"], "slug": "misuse",
-    "requires": { "anyOfCategories": ["object","tool"] },
-    "suggests": ["hammer","tool"],
-    "image": "sprites/verbs/verb_misuse.png" },
-  { "word": "confuse", "position": "final", "syllables": 2, "phonemes": ["s"], "slug": "confuse",
-    "requires": { "anyOfCategories": ["person","question"] },
-    "suggests": ["puzzle","face"],
-    "image": "sprites/verbs/verb_confuse.png" },
-  { "word": "excuse", "position": "final", "syllables": 2, "phonemes": ["s"], "slug": "excuse",
-    "requires": { "anyOfCategories": ["person"] },
-    "suggests": ["mouth","hand"],
-    "image": "sprites/verbs/verb_excuse.png" },
-  { "word": "refuse", "position": "final", "syllables": 2, "phonemes": ["s"], "slug": "refuse",
-    "requires": { "anyOfCategories": ["person","object"] },
-    "suggests": ["hand","toy"],
-    "image": "sprites/verbs/verb_refuse.png" }
-]
+    {
+      "word": "sit",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "s"
+      ],
+      "source": "s-initial",
+      "slug": "sit",
+      "image": "sprites/actions/act_sit.png",
+      "categories": [
+        "actions"
+      ]
+    },
+    {
+      "word": "sort",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "s"
+      ],
+      "source": "s-initial",
+      "slug": "sort",
+      "image": "sprites/actions/act_sort.png",
+      "categories": [
+        "actions"
+      ]
+    },
+    {
+      "word": "serve",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "s"
+      ],
+      "source": "s-initial",
+      "slug": "serve",
+      "image": "sprites/actions/act_serve.png",
+      "categories": [
+        "actions",
+        "food",
+        "beverage"
+      ]
+    },
+    {
+      "word": "laugh",
+      "syllables": 1,
+      "position": "final",
+      "phonemes": [
+        "f"
+      ],
+      "source": "f-final",
+      "slug": "laugh",
+      "image": "sprites/actions/act_laugh.png",
+      "categories": [
+        "actions",
+        "emotions"
+      ]
+    },
+    {
+      "word": "cough",
+      "syllables": 1,
+      "position": "final",
+      "phonemes": [
+        "f"
+      ],
+      "source": "f-final",
+      "slug": "cough",
+      "image": "sprites/actions/act_cough.png",
+      "categories": [
+        "actions",
+        "health"
+      ]
+    },
+    {
+      "word": "go",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "g"
+      ],
+      "source": "g-initial",
+      "slug": "go",
+      "image": "sprites/actions/act_go.png",
+      "categories": [
+        "actions",
+        "movement"
+      ]
+    },
+    {
+      "word": "get",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "g"
+      ],
+      "source": "g-initial",
+      "slug": "get",
+      "image": "sprites/actions/act_get.png",
+      "categories": [
+        "actions"
+      ]
+    },
+    {
+      "word": "kick",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "k"
+      ],
+      "source": "k-initial",
+      "slug": "kick",
+      "image": "sprites/actions/act_kick.png",
+      "categories": [
+        "sports",
+        "actions"
+      ]
+    },
+    {
+      "word": "kiss",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "k"
+      ],
+      "source": "k-initial",
+      "slug": "kiss",
+      "image": "sprites/actions/act_kiss.png",
+      "categories": [
+        "actions",
+        "people"
+      ]
+    },
+    {
+      "word": "cook",
+      "syllables": 1,
+      "position": "final",
+      "phonemes": [
+        "k"
+      ],
+      "source": "k-final",
+      "slug": "cook",
+      "image": "sprites/actions/act_cook.png",
+      "categories": [
+        "actions",
+        "food"
+      ]
+    },
+    {
+      "word": "look",
+      "syllables": 1,
+      "position": "final",
+      "phonemes": [
+        "k"
+      ],
+      "source": "k-final",
+      "slug": "look",
+      "image": "sprites/actions/act_look.png",
+      "categories": [
+        "actions",
+        "perception"
+      ]
+    },
+    {
+      "word": "walk",
+      "syllables": 1,
+      "position": "final",
+      "phonemes": [
+        "k"
+      ],
+      "source": "k-final",
+      "slug": "walk",
+      "image": "sprites/actions/act_walk.png",
+      "categories": [
+        "actions",
+        "movement"
+      ]
+    },
+    {
+      "word": "knock",
+      "syllables": 1,
+      "position": "final",
+      "phonemes": [
+        "k"
+      ],
+      "source": "k-final",
+      "slug": "knock",
+      "image": "sprites/actions/act_knock.png",
+      "categories": [
+        "actions"
+      ]
+    },
+    {
+      "word": "shake",
+      "syllables": 1,
+      "position": "final",
+      "phonemes": [
+        "k"
+      ],
+      "source": "k-final",
+      "slug": "shake",
+      "image": "sprites/actions/act_shake.png",
+      "categories": [
+        "actions"
+      ]
+    },
+    {
+      "word": "run",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "r"
+      ],
+      "source": "r-initial",
+      "slug": "run",
+      "image": "sprites/actions/act_run.png",
+      "categories": [
+        "actions",
+        "movement"
+      ]
+    },
+    {
+      "word": "read",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "r"
+      ],
+      "source": "r-initial",
+      "slug": "read",
+      "image": "sprites/actions/act_read.png",
+      "categories": [
+        "actions",
+        "communication"
+      ]
+    },
+    {
+      "word": "ride",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "r"
+      ],
+      "source": "r-initial",
+      "slug": "ride",
+      "image": "sprites/actions/act_ride.png",
+      "categories": [
+        "actions",
+        "transportation"
+      ]
+    },
+    {
+      "word": "tie",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "t"
+      ],
+      "source": "t-initial",
+      "slug": "tie",
+      "image": "sprites/actions/act_tie.png",
+      "categories": [
+        "actions"
+      ]
+    },
+    {
+      "word": "toast",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "t"
+      ],
+      "source": "t-initial",
+      "slug": "toast",
+      "image": "sprites/actions/act_toast.png",
+      "categories": [
+        "actions",
+        "food",
+        "beverage"
+      ]
+    },
+    {
+      "word": "tape",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "t"
+      ],
+      "source": "t-initial",
+      "slug": "tape",
+      "image": "sprites/actions/act_tape.png",
+      "categories": [
+        "actions",
+        "tools"
+      ]
+    },
+    {
+      "word": "throw",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "th"
+      ],
+      "source": "th-initial",
+      "slug": "throw",
+      "image": "sprites/actions/act_throw.png",
+      "categories": [
+        "actions",
+        "sports"
+      ]
+    },
+    {
+      "word": "think",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "th"
+      ],
+      "source": "th-initial",
+      "slug": "think",
+      "image": "sprites/actions/act_think.png",
+      "categories": [
+        "cognition",
+        "actions"
+      ]
+    },
+    {
+      "word": "thank",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "th"
+      ],
+      "source": "th-initial",
+      "slug": "thank",
+      "image": "sprites/actions/act_thank.png",
+      "categories": [
+        "actions",
+        "communication"
+      ]
+    },
+    {
+      "word": "thaw",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "th"
+      ],
+      "source": "th-initial",
+      "slug": "thaw",
+      "image": "sprites/actions/act_thaw.png",
+      "categories": [
+        "actions",
+        "food"
+      ]
+    },
+    {
+      "word": "vote",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "v"
+      ],
+      "source": "v-initial",
+      "slug": "vote",
+      "image": "sprites/actions/act_vote.png",
+      "categories": [
+        "civics",
+        "actions"
+      ]
+    },
+    {
+      "word": "visit",
+      "syllables": 2,
+      "position": "initial",
+      "phonemes": [
+        "v"
+      ],
+      "source": "v-initial",
+      "slug": "visit",
+      "image": "sprites/actions/act_visit.png",
+      "categories": [
+        "actions",
+        "people"
+      ]
+    },
+    {
+      "word": "give",
+      "syllables": 1,
+      "position": "final",
+      "phonemes": [
+        "v"
+      ],
+      "source": "v-final",
+      "slug": "give",
+      "image": "sprites/actions/act_give.png",
+      "categories": [
+        "actions"
+      ]
+    },
+    {
+      "word": "have",
+      "syllables": 1,
+      "position": "final",
+      "phonemes": [
+        "v"
+      ],
+      "source": "v-final",
+      "slug": "have",
+      "image": "sprites/actions/act_have.png",
+      "categories": [
+        "actions"
+      ]
+    },
+    {
+      "word": "carve",
+      "syllables": 1,
+      "position": "final",
+      "phonemes": [
+        "v"
+      ],
+      "source": "v-final",
+      "slug": "carve",
+      "image": "sprites/actions/act_carve.png",
+      "categories": [
+        "actions",
+        "tools"
+      ]
+    },
+    {
+      "word": "weave",
+      "syllables": 1,
+      "position": "final",
+      "phonemes": [
+        "v"
+      ],
+      "source": "v-final",
+      "slug": "weave",
+      "image": "sprites/actions/act_weave.png",
+      "categories": [
+        "actions",
+        "crafts"
+      ]
+    },
+    {
+      "word": "leave",
+      "syllables": 1,
+      "position": "final",
+      "phonemes": [
+        "v"
+      ],
+      "source": "v-final",
+      "slug": "leave",
+      "image": "sprites/actions/act_leave.png",
+      "categories": [
+        "actions",
+        "movement"
+      ]
+    },
+    {
+      "word": "move",
+      "syllables": 1,
+      "position": "final",
+      "phonemes": [
+        "v"
+      ],
+      "source": "v-final",
+      "slug": "move",
+      "image": "sprites/actions/act_move.png",
+      "categories": [
+        "actions",
+        "movement"
+      ]
+    },
+    { "word": "share", "syllables": 1, "position": "initial", "phonemes": ["sh"], "source": "sh-initial", "slug": "share", "image": "sprites/actions/act_share.png", "categories": ["communication", "actions"] },
+    { "word": "shake", "syllables": 1, "position": "initial", "phonemes": ["sh"], "source": "sh-initial", "slug": "shake", "image": "sprites/actions/act_shake.png", "categories": ["actions", "movement"] },
+    { "word": "shave", "syllables": 1, "position": "initial", "phonemes": ["sh"], "source": "sh-initial", "slug": "shave", "image": "sprites/actions/act_shave.png", "categories": ["actions", "health"] },
+    { "word": "shower", "syllables": 2, "position": "initial", "phonemes": ["sh"], "source": "sh-initial", "slug": "shower", "image": "sprites/actions/act_shower.png", "categories": ["actions", "health"] },
+  { "word": "shampoo", "syllables": 2, "position": "initial", "phonemes": ["sh"], "source": "sh-initial", "slug": "shampoo", "image": "sprites/actions/act_shampoo.png", "categories": ["actions", "health"] }
+  ],
+  "adjectives": [
+    {
+      "word": "sad",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "s"
+      ],
+      "source": "s-initial",
+      "slug": "sad",
+      "image": "sprites/descriptors/adj_sad.png",
+      "categories": [
+        "emotions",
+        "descriptors"
+      ]
+    },
+    {
+      "word": "safe",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "s"
+      ],
+      "source": "s-initial",
+      "slug": "safe",
+      "image": "sprites/descriptors/adj_safe.png",
+      "categories": [
+        "descriptors"
+      ]
+    },
+    {
+      "word": "sunny",
+      "syllables": 2,
+      "position": "initial",
+      "phonemes": [
+        "s"
+      ],
+      "source": "s-initial",
+      "slug": "sunny",
+      "image": "sprites/descriptors/adj_sunny.png",
+      "categories": [
+        "weather",
+        "descriptors"
+      ]
+    },
+    {
+      "word": "soft",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "s"
+      ],
+      "source": "s-initial",
+      "slug": "soft",
+      "image": "sprites/descriptors/adj_soft.png",
+      "categories": [
+        "descriptors"
+      ]
+    },
+    {
+      "word": "silver",
+      "syllables": 2,
+      "position": "initial",
+      "phonemes": [
+        "s"
+      ],
+      "source": "s-initial",
+      "slug": "silver",
+      "image": "sprites/descriptors/adj_silver.png",
+      "categories": [
+        "colors",
+        "materials"
+      ]
+    },
+    {
+      "word": "fair",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "f"
+      ],
+      "source": "f-initial",
+      "slug": "fair",
+      "image": "sprites/descriptors/adj_fair.png",
+      "categories": [
+        "descriptors"
+      ]
+    },
+    {
+      "word": "fast",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "f"
+      ],
+      "source": "f-initial",
+      "slug": "fast",
+      "image": "sprites/descriptors/adj_fast.png",
+      "categories": [
+        "descriptors"
+      ]
+    },
+    {
+      "word": "tough",
+      "syllables": 1,
+      "position": "final",
+      "phonemes": [
+        "f"
+      ],
+      "source": "f-final",
+      "slug": "tough",
+      "image": "sprites/descriptors/adj_tough.png",
+      "categories": [
+        "descriptors"
+      ]
+    },
+    {
+      "word": "amazing",
+      "syllables": 3,
+      "position": "medial",
+      "phonemes": [
+        "m"
+      ],
+      "source": "m-medial",
+      "slug": "amazing",
+      "image": "sprites/descriptors/adj_amazing.png",
+      "categories": [
+        "descriptors"
+      ]
+    },
+    {
+      "word": "red",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "r"
+      ],
+      "source": "r-initial",
+      "slug": "red",
+      "image": "sprites/descriptors/adj_red.png",
+      "categories": [
+        "colors"
+      ]
+    },
+    {
+      "word": "hot",
+      "syllables": 1,
+      "position": "final",
+      "phonemes": [
+        "t"
+      ],
+      "source": "t-final",
+      "slug": "hot",
+      "image": "sprites/descriptors/adj_hot.png",
+      "categories": [
+        "descriptors",
+        "temperature"
+      ]
+    },
+    {
+      "word": "light",
+      "syllables": 1,
+      "position": "final",
+      "phonemes": [
+        "t"
+      ],
+      "source": "t-final",
+      "slug": "light",
+      "image": "sprites/descriptors/adj_light.png",
+      "categories": [
+        "descriptors"
+      ]
+    },
+    {
+      "word": "thin",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "th"
+      ],
+      "source": "th-initial",
+      "slug": "thin",
+      "image": "sprites/descriptors/adj_thin.png",
+      "categories": [
+        "descriptors"
+      ]
+    },
+    {
+      "word": "thick",
+      "syllables": 1,
+      "position": "initial",
+      "phonemes": [
+        "th"
+      ],
+      "source": "th-initial",
+      "slug": "thick",
+      "image": "sprites/descriptors/adj_thick.png",
+      "categories": [
+        "descriptors"
+      ]
+    },
+    {
+      "word": "heavy",
+      "syllables": 2,
+      "position": "medial",
+      "phonemes": [
+        "v"
+      ],
+      "source": "v-medial",
+      "slug": "heavy",
+      "image": "sprites/descriptors/adj_heavy.png",
+      "categories": [
+        "descriptors",
+        "weight"
+      ]
+    },
+    {
+      "word": "wavy",
+      "syllables": 2,
+      "position": "medial",
+      "phonemes": [
+        "v"
+      ],
+      "source": "v-medial",
+      "slug": "wavy",
+      "image": "sprites/descriptors/adj_wavy.png",
+      "categories": [
+        "descriptors"
+      ]
+    },
+    {
+      "word": "alive",
+      "syllables": 2,
+      "position": "final",
+      "phonemes": [
+        "v"
+      ],
+      "source": "v-final",
+      "slug": "alive",
+      "image": "sprites/descriptors/adj_alive.png",
+      "categories": [
+        "descriptors"
+      ]
+    },
+{ "word": "shiny", "syllables": 2, "position": "initial", "phonemes": ["sh"], "source": "sh-initial", "slug": "shiny", "image": "sprites/descriptors/adj_shiny.png", "categories": ["descriptors"] }
+  ]
 }
