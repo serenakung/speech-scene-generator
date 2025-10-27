@@ -1,5 +1,122 @@
 // ====== Speech Scenes — main.js (final merged) ======
 
+// === PHONEME & CLUSTER MASTER LISTS ===
+// IPA consonant phonemes commonly used in (GenAm/BrE) English.
+const PHONEMES_IPA = [
+  "p","b","t","d","k","g",
+  "f","v","θ","ð","s","z","ʃ","ʒ","h",
+  "tʃ","dʒ",
+  "m","n","ŋ",
+  "l","r","j","w"
+];
+
+// Onset clusters (2-letter)
+const CLUSTERS_2 = [
+  "bl","br","cl","cr","dr","fl","fr","gl","gr","pl","pr","sc","sk","sl","sm","sn","sp","st","sw","tr","tw"
+];
+
+// Common 3-letter clusters
+const CLUSTERS_3 = ["scr","spl","spr","squ","str"];
+
+// Build a single list for UI
+const PHONEME_GROUPS = [
+  { label: "Single phonemes (IPA)", type: "phoneme", items: PHONEMES_IPA },
+  { label: "Clusters (2-letter)",   type: "cluster", items: CLUSTERS_2 },
+  { label: "Clusters (3-letter)",   type: "cluster", items: CLUSTERS_3 }
+];
+
+
+function renderPhonemeChecklist() {
+    console.log("[phonemes] renderPhonemeChecklist() called");
+  const container = document.getElementById("phonemeFilters");
+  if (!container) return;
+
+  container.innerHTML = "";
+  PHONEME_GROUPS.forEach(group => {
+    const groupEl = document.createElement("div");
+    groupEl.className = "phoneme-group";
+
+    const h4 = document.createElement("h4");
+    h4.textContent = group.label;
+    groupEl.appendChild(h4);
+
+    const list = document.createElement("div");
+    list.className = "phoneme-list";
+
+    group.items.forEach(item => {
+      const id = `ph_${group.type}_${item.replace(/[^a-zʃʒθð]+/gi,"-")}`;
+      const wrap = document.createElement("label");
+      wrap.className = "phoneme-chip";
+      wrap.setAttribute("title", item);
+
+      const cb = document.createElement("input");
+      cb.type = "checkbox";
+      cb.value = item;
+      cb.name = "phoneme";  
+      cb.dataset.kind = group.type;
+      cb.id = id;
+
+      const span = document.createElement("span");
+      span.textContent = `/${item}/`;
+
+      wrap.appendChild(cb);
+      wrap.appendChild(span);
+      list.appendChild(wrap);
+    });
+
+    groupEl.appendChild(list);
+    container.appendChild(groupEl);
+  });
+
+  // Select/Clear handlers
+  const btnAll = document.getElementById("btnSelectAllPhonemes");
+  const btnClear = document.getElementById("btnClearPhonemes");
+  if (btnAll) btnAll.onclick = () => setAllPhonemeChecks(true);
+  if (btnClear) btnClear.onclick = () => setAllPhonemeChecks(false);
+}
+
+function setAllPhonemeChecks(val) {
+  document.querySelectorAll("#phonemeFilters input[type=checkbox]").forEach(cb => {
+    cb.checked = val;
+  });
+  // If your app regenerates on change, trigger it here (optional)
+  // generateScene();
+}
+
+function getSelectedPhonemeFilters() {
+  const selected = { phonemes: new Set(), clusters: new Set() };
+  document.querySelectorAll("#phonemeFilters input[type=checkbox]:checked").forEach(cb => {
+    const kind = cb.dataset.kind;
+    const val = cb.value.toLowerCase();
+    if (kind === "phoneme") selected.phonemes.add(val);
+    else if (kind === "cluster") selected.clusters.add(val);
+  });
+  return selected;
+}
+
+// Returns true if a word matches any selected IPA phoneme or any selected cluster
+function matchesPhonemeOrCluster(wordEntry, selected) {
+  // 1) Match IPA phoneme tags if present on the entry
+  if (selected.phonemes.size > 0 && Array.isArray(wordEntry.phonemes)) {
+    const tagHit = wordEntry.phonemes.some(p => selected.phonemes.has(p.toLowerCase()));
+    if (tagHit) return true;
+  }
+
+  // 2) Match clusters orthographically (simple heuristic)
+  if (selected.clusters.size > 0) {
+    const w = (wordEntry.word || "").toLowerCase();
+
+    // check anywhere in word; if you want ONSET-only, use: w.startsWith(cl)
+    for (const cl of selected.clusters) {
+      if (w.includes(cl)) return true;
+    }
+  }
+
+  // If nothing selected, treat as pass-through (handled by caller)
+  return selected.phonemes.size === 0 && selected.clusters.size === 0;
+}
+
+
 // ---- Constants & UI refs ----
 const CANVAS_W = 2480, CANVAS_H = 3508; // A4 @ 300dpi
 const canvas = document.getElementById('scene');
@@ -19,6 +136,7 @@ const useBgsEl     = document.getElementById('useBackgrounds');
 
 let WORDS = null;   // loaded from JSON
 let BG_LIST = null; // backgrounds manifest or fallback
+
 
 // ---- Error modal helpers ----
 const errorModal = document.getElementById('errorModal');
@@ -247,14 +365,29 @@ function matchesSyllables(item, sel) {
  * positions: ['initial','medial','final']
  * syllablesSel: ['1','2','3','4plus']
  */
+function passesPhonemeFilters(item, legacyPhonemes) {
+  const sel = getSelectedPhonemeFilters(); // { phonemes:Set, clusters:Set }
+
+  // If nothing selected in the new UI, fall back to legacy checkbox behavior
+  if (sel.phonemes.size === 0 && sel.clusters.size === 0) {
+    return Array.isArray(item.phonemes)
+      ? item.phonemes.some(p => legacyPhonemes.includes(p))
+      : true;
+  }
+
+  // Otherwise use the new IPA/cluster matcher
+  return matchesPhonemeOrCluster(item, sel);
+}
+
 function pool(type, phonemes, positions, syllablesSel) {
   const list = (type === 'actions') ? WORDS.verbs : WORDS.nouns;
   return list.filter(item =>
     positions.includes(item.position) &&
     matchesSyllables(item, syllablesSel || []) &&
-    (Array.isArray(item.phonemes) ? item.phonemes.some(p => phonemes.includes(p)) : true)
+    passesPhonemeFilters(item, phonemes)
   );
 }
+
 function sample(list, n) { return [...list].sort(() => Math.random() - 0.5).slice(0, n); }
 function randBetween(a, b) { return Math.floor(Math.random() * (b - a + 1)) + a; }
 
@@ -532,3 +665,13 @@ Promise.all([loadWords(), loadBackgroundList()])
     console.error(err);
     targetsEl.innerHTML = `<p class="error">Startup error. Check that <code>data/words.json</code> (or words-library.json) and optional <code>data/backgrounds.json</code> exist, and that you're serving via <code>http://</code>.</p>`;
   });
+
+  document.addEventListener("DOMContentLoaded", () => {
+  renderPhonemeChecklist();
+});
+
+if (document.readyState !== 'loading') {
+  renderPhonemeChecklist();
+} else {
+  document.addEventListener('DOMContentLoaded', renderPhonemeChecklist);
+}

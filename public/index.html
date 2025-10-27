@@ -12,17 +12,20 @@
 
   <section class="controls">
     <!-- IPA phoneme checklist -->
-    <div class="group">
-      <label class="group-label">Phonemes (IPA):</label>
-      <div class="checks">
-        <label><input type="checkbox" name="phoneme" value="s" checked> /s/</label>
-        <label><input type="checkbox" name="phoneme" value="z"> /z/</label>
-        <label><input type="checkbox" name="phoneme" value="k"> /k/</label>
-        <label><input type="checkbox" name="phoneme" value="t"> /t/</label>
-        <label><input type="checkbox" name="phoneme" value="ʃ"> /ʃ/</label>
-        <label><input type="checkbox" name="phoneme" value="θ"> /θ/</label>
-      </div>
-    </div>
+        <section class="filter-block">
+        <h3>Phonemes & Clusters</h3>
+
+        <div class="phoneme-controls">
+            <button type="button" id="btnSelectAllPhonemes" class="btn-mini">Select all</button>
+            <button type="button" id="btnClearPhonemes" class="btn-mini">Clear</button>
+        </div>
+
+        <div id="phonemeFilters" class="phoneme-grid">
+            <!-- Populated by main.js: renderPhonemeChecklist() -->
+        </div>
+
+        <p class="hint">Tip: You can pick single phonemes (IPA, e.g., /s/, /ʃ/) and/or clusters (e.g., /bl/, /str/).</p>
+        </section>
 
     <!-- NEW: Syllables checklist -->
     <div class="group">
@@ -97,6 +100,6 @@
   </div>
 </main>
 
-<script type="module" src="main.js"></script>
+<script src="./main.js" defer></script>
 </body>
 </html>
